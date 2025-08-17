@@ -61,7 +61,8 @@ def add_sb(user):
    ## try:
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     print('executed one cursor statemnt')
-    cursor.execute(f'create table t_sb_{user["cid"]}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) refernces users(cid) on delete cascade on update cascade ,sb int refernces users(sb) on delete cascade on update cascde, date date, ToWhom varchar(25) default NULL ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+    cursor.execute(f'insert into t_sb_{user["cid"]}(sb) values(%s)'%(user['sb'],))
     mycon.commit()
     mycon.close()
     flash('Savings account succesfully created!!','info')
@@ -74,7 +75,8 @@ def add_cb(user):
     cursor=mycon.cursor()
     try:
         cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
-        cursor.execute(f'create table t_cb_{user['cid']}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+        cursor.execute(f'create table t_cb_{user['cid']}(cid char(6) refernces users(cid) on delete cascade on update cascade,cb int refernces users(cb) on update cascade on delete cascade, date date, ToWhom varchar(25) default NULL, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values(%s)'%(user['cb'],))
         mycon.commit()
         mycon.close()
         flash('Current account succesfully created!!','info')
