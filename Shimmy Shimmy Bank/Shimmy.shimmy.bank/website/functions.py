@@ -58,17 +58,16 @@ def add_sb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     print('inside add_sb')
-    try:
-        cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-        print('executed one cursor statemnt')
-        cursor.execute(f'create table t_sb_{user["cid"]}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-        mycon.commit()
-        mycon.close()
-        flash('Savings account succesfully created!!','info')
-        return user
-    except:
-        print('error')
-        return False
+   ## try:
+    cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
+    print('executed one cursor statemnt')
+    cursor.execute(f'create table t_sb_{user["cid"]}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+    mycon.commit()
+    mycon.close()
+    flash('Savings account succesfully created!!','info')
+    return user
+    ##except:
+        #####return False
     
 def add_cb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
