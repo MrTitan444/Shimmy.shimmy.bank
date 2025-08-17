@@ -76,7 +76,7 @@ def add_cb(user):
     try:
         cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
         cursor.execute(f'create table t_cb_{user['cid']}(cid char(6) refernces users(cid) on delete cascade on update cascade,cb int refernces users(cb) on update cascade on delete cascade, date date, ToWhom varchar(25) default NULL, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values(%s)'%(user['cb'],))
+        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values("%s")'%(user['cb'],))
         mycon.commit()
         mycon.close()
         flash('Current account succesfully created!!','info')
