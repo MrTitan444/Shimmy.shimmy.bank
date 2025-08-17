@@ -44,17 +44,19 @@
                         <tr>
                             <th style="border: 2px solid black;">Date</th>
                             <th style="border: 2px solid black;">To</th>
-                            <th style="border: 2px solid black;">Deposit</th>
-                            <th style="border: 2px solid black;">Withdrawal</th>
+                            <th style="border: 2px solid black;">Amount</th>
+                            <th style="border: 2px solid black;">Particular</th>
+                            <th style="border: 2px solid black;">Balance</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in lasvegas %}
                         <tr>
-                            <td style="border: 2px solid black;">{{ i[0] }}</td>
-                            <td style="border: 2px solid black;">{{ i[1] }}</td>
                             <td style="border: 2px solid black;">{{ i[2] }}</td>
                             <td style="border: 2px solid black;">{{ i[3] }}</td>
+                            <td style="border: 2px solid black;">{{ i[4] }}</td>
+                            <td style="border: 2px solid black;">{{ i[5] }}</td>
+                            <td style="border: 2px solid black;">{{ i[6] }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
