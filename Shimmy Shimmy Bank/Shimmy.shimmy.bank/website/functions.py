@@ -61,7 +61,7 @@ def add_sb(user):
     try:
         cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
         print('executed one cursor statemnt')
-        cursor.execute(f'create table t_sb_{user["cid"]}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int)')
+        cursor.execute(f'create table t_sb_{user["cid"]}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
         mycon.commit()
         mycon.close()
         flash('Savings account succesfully created!!','info')
@@ -73,16 +73,15 @@ def add_sb(user):
 def add_cb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
-    #try:
-    cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
-    cursor.execute(f'create table t_cb_{user['cid']}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int)')
-    mycon.commit()
-    mycon.close()
-    flash('Current account succesfully created!!','info')
-    return user
-    #except:
-    print('error')
-    return False
+    try:
+        cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
+        cursor.execute(f'create table t_cb_{user['cid']}(date date, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+        mycon.commit()
+        mycon.close()
+        flash('Current account succesfully created!!','info')
+        return user
+    except:
+        return False
 
 
 def get_info_login(user):

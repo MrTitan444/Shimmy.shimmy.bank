@@ -80,17 +80,25 @@
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>APPLY FOR A CREDIT CARD</b></center></h1>
-            <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/cc">Apply Now</a></b></button></center><br><br>
+            {% if session.user.sb!=-1 %}
+              <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/cc">Apply Now</a></b></button></center><br><br>
+            {% else %}
+              <p>Please create a savings bank account to create a credit card number</p>
+            {% endif %}
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>LOANS</b></center></h1>
-            <center><button type="button" class="btn btn-info" @click="submitForm"><b>Home Loan</b></button></center>
-            <center><button type="button" class="btn btn-info" @click="submitForm"><b>Car Loan</b></button></center><br><br>
+            <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/homeloan"> Home Loan </a></b></button></center>
+            <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/carloan">Car Loan</a></b></button></center><br><br>
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION CENTER</b></center></h1>
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b>Transfer within Bank</b></button></center>
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b>Withdraw</b></button></center><br><br>
+            {% if session.user.sb!=-1 or session.user.cb!=-1 %}
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/transfer"> Transfer within Bank </a></b></button></center>
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/withdraw"> Withdraw </a></b></button></center><br><br>
+            {% else %}
+              <p>Please create an account to withdraw or transfer</p>
+            {% endif %}
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION HISTORY</b></center></h1>

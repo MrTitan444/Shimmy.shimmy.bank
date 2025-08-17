@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from website.functions import *
 from random import randint
 from datetime import date
@@ -11,7 +11,6 @@ def home():
 
 @views.route('/ourservices')
 def ourservices():
-    print(session)
     return render_template('ourservices.html') 
 
 @views.route('/confirm_acc',methods=['POST'])
@@ -20,18 +19,11 @@ def confirm_acc():
     print(acc)
     if "savings" in acc:
         session['user']['sb']=randint(10000,99999)
-        print(session)
         add_sb(session['user'])
-    elif "current" in acc:
+    if "current" in acc:
         session['user']['cb']=randint(10000,99999)
         print(session)
         add_cb(session['user'])
-    else:
-        session['user']['cb']=randint(10000,99999)
-        session['user']['sb']=randint(10000,99999)
-        add_sb(session['user'])
-        add_cb(session['user'])
-        print(session)
     return render_template('ourservices.html')
 
 @views.route('/cc',methods=['POST'])
@@ -57,3 +49,19 @@ def transhistcur():
 def transhistsav():
     l=get_t_sb(session['user'])
     return render_template('transhistsav.html',l=l)
+
+@views.route('/carloan',methods=['GET'])
+def carloan():
+    return render_template('carloan.html')
+
+@views.route('/homeloan',methods=['GET'])
+def homeloan():
+    return render_template('homeloan.html')
+
+@views.route('/transfer',methods=['GET'])
+def transfer():
+    return render_template('transfer.html')
+
+@views.route('/withdraw',methods=['GET'])
+def withdraw():
+    return render_template('withdraw.html')
