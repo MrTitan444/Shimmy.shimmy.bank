@@ -61,7 +61,7 @@ def add_sb(user):
    ## try:
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     print('executed one cursor statemnt')
-    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) refernces users(cid) on delete cascade on update cascade ,sb int refernces users(sb) on delete cascade on update cascde, date date, ToWhom varchar(25) default NULL ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) references users(cid) on delete cascade on update cascade ,sb int references users(sb) on delete cascade on update cascade, date date, ToWhom varchar(25) default NULL ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
     cursor.execute(f'insert into t_sb_{user["cid"]}(sb) values(%s)'%(user['sb'],))
     mycon.commit()
     mycon.close()
@@ -75,8 +75,8 @@ def add_cb(user):
     cursor=mycon.cursor()
     try:
         cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
-        cursor.execute(f'create table t_cb_{user['cid']}(cid char(6) refernces users(cid) on delete cascade on update cascade,cb int refernces users(cb) on update cascade on delete cascade, date date, ToWhom varchar(25) default NULL, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values("%s")'%(user['cb'],))
+        cursor.execute(f'create table t_cb_{user['cid']}(cid char(6) references users(cid) on delete cascade on update cascade,cb int references users(cb) on update cascade on delete cascade, date date, ToWhom varchar(25) default NULL, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values(%s)'%(user['cb'],))
         mycon.commit()
         mycon.close()
         flash('Current account succesfully created!!','info')
@@ -115,7 +115,7 @@ def get_t_sb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     try:
-        cursor.execute('select * from t_sb"{}" where cid ={}'.format(user['cid']))
+        cursor.execute(f'select * from t_sb_{user["cid"]} where cid ="%s"'%(user['cid'],))
         data=cursor.fetchall()
         mycon.close()
         return data
