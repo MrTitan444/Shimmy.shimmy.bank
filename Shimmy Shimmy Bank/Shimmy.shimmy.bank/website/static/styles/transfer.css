@@ -1,0 +1,95 @@
+/* Webkit */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Content */
+
+.btn {
+  width: 100%;
+  height: 5%;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+.card-body {
+  margin-top: 0px;
+  margin-bottom:-50px;
+  background-color: #ade6d8;
+  border: 5px solid #000000;
+
+}
+
+
+.card {
+  top: 100px;
+  width: 700px; height: 375px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+details {
+  border: 1px solid #767676;
+  height: 45%;
+  width: 100%;
+  border-radius: 5px;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 3px 3px;
+}
+
+details summary::marker {
+  display: none;
+  font-size: 0;
+}
+
+
+
+
+
+
+/* Footer */
+
+.jumbotron.footer {
+    background-color: #353b48;
+    color: #dcdde1;
+    display: flex;
+    font-size: 20px;
+    margin-top: 73px;
+    margin-bottom: -50px;
+    border-radius: 0%;
+}
+
+.team {
+    margin-left: 120px;
+    margin-top: 3px;
+}
+
+.links {
+	display: flex;
+	flex-direction: row;
+    padding-right: 40px;
+    margin-left: 400px;
+}
+
+.img {
+    margin-right: 80px;
+    font-size: 20px;
+}
+
+.fa {
+    color: #2bcbba;
+}

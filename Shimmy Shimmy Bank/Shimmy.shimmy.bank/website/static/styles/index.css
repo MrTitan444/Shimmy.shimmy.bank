@@ -1,0 +1,87 @@
+/* Webkit */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Content */
+
+.text-block {
+  position: absolute;
+  bottom: 450px;
+  right: 30px;
+  background-color: transparent;
+  text-align: left;
+  color: rgb(255, 255, 255);
+
+}
+
+.flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: justify;
+}
+
+.summary {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile img {
+    display: flex;
+    align-items: center;
+    margin-bottom:-50px;
+    margin: auto;
+    width: 2249px;
+    height: 930px;
+}
+
+
+/* Footer */
+
+.jumbotron.footer {
+    background-color: #353b48;
+    color: #dcdde1;
+    display: flex;
+    font-size: 20px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    border-radius: 0%;
+}
+
+.team {
+    margin-left: 120px;
+    margin-top: 3px;
+}
+
+.links {
+	display: flex;
+	flex-direction: row;
+    padding-right: 40px;
+    margin-left: 350px;
+}
+
+.img {
+    margin-right: 80px;
+    font-size: 20px;
+}
+
+.fa {
+    color: #2bcbba;
+}

@@ -1,0 +1,141 @@
+#open an account-savings current fixed deposit
+#credit card- apply for a credit card- gen card no
+#loans- home loan and car loan
+#transactions-account to account within bank
+#transaction history table
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/styles/homeloan.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <title>Apply for a Home Loan</title>
+</head>
+<body style="background-color: #a0d5df;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="nav navbar-nav">
+        <li><a href="/" class="nav-item nav-link nav-anchor active" id="home"><b>Home</b></a></li>
+        <li><a href="/ourservices" class="nav-item nav-link nav-anchor active" id="home"><b>Our services</b></a></li>
+        {% if "user" not in session %}
+          <li><a href="/signup" class="nav-item nav-link nav-anchor"><b>Sign Up</b></a></li>
+          <li><a href="/login" class="nav-item nav-link nav-anchor"><b>Log In</b></a></li>
+        {% endif %}
+        <li><a href="/logout" class="nav-item nav-link nav-anchor"><b>Log Out</b></a></li>
+        <!--li><a href="" class="nav-item nav-link nav-anchor" id="blogs">Blogs</a></li-->
+      </ul>
+    </div>
+  </nav>>
+  <!-- Content -->
+  <div class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="summary flex">
+            <h1 style="font-family: 'Courier New'"><center><b>HOME LOAN</b></center></h1>
+          </div>
+        </div>
+      </div>
+  <br><br><br>
+  <div class="card">
+    <div class="card-body">
+          <div>
+            <h1 style="font-family: 'Courier New'"><center><b>APPLY FOR A HOME LOAN</b></center></h1>
+            <h2 style="font-family: 'Courier New'"><center><b>Prerequisites:</b></center></h2>
+            <ul style="font-family: 'Courier New'">
+              <li><b>Age:</b> <b>You must be at least 18 years old.</b></li>
+              <li><b>Income:</b> <b>You must have a stable source of income.</b></li>
+              <li><b>Accounts:</b> <b><u>You must have a savings account under our bank.</u></b></li>
+              <li><b>Credit Score:</b> <b>A good credit score is essential.</b></li>
+              <li><b>Property Documents:</b> <b>You must have the necessary property documents ready.</b></li>
+            </ul>
+            <h3 style="font-family: 'Courier New'"><center><b>Interest rates are as follows:</b></center></h3>
+            <ul style="font-family: 'Courier New'">
+              <li><b>3 months:</b> 5% per annum</li>
+              <li><b>6 months:</b> 5.5% per annum</li>
+              <li><b>1 year:</b> 12% per annum</li>
+              <li><b>2 years:</b> 14% per annum</li>
+              <li><b>5 years:</b> 17% per annum</li>
+              <li><b>10 years:</b> 20% per annum</li>
+              <li><b>20 years:</b> 24% per annum</li>
+            </ul>
+              <center><details><summary style="font-family: 'Courier New'"><b>Choose time period</b></summary>
+              <form>
+              <fieldset>
+              <ul>
+                <li>
+                  <label for="3months"><font style="font-family: 'Courier New'">3 months</font><input type="checkbox" id="3months" name="3months" value="3months" /></label>
+
+                </li>
+                <li>
+                  <label for="6months"><font style="font-family: 'Courier New'">6 months</font><input type="checkbox" id="6months" name="6months" value="6months" /></label>
+                </li>
+               <li>
+                 <label for="1year"><font style="font-family: 'Courier New'">1 year</font><input type="checkbox" id="1year" name="1year" value="1year" /></label>
+                </li>
+                <li>
+                 <label for="2years"><font style="font-family: 'Courier New'">2 years</font><input type="checkbox" id="2years" name="2years" value="2years" /></label>
+                </li>
+                <li>
+                 <label for="5years"><font style="font-family: 'Courier New'">5 years</font><input type="checkbox" id="5years" name="5years" value="5years" /></label>
+                </li>
+                <li>
+                 <label for="10years"><font style="font-family: 'Courier New'">10 years</font><input type="checkbox" id="10years" name="10years" value="10years" /></label>
+                </li>
+                <li>
+                 <label for="20years"><font style="font-family: 'Courier New'">20 years</font><input type="checkbox" id="20years" name="20years" value="20years" /></label>
+                </li>
+             </ul>
+            </fieldset>
+         </form>
+        </details></center><br><br>
+          <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href=" " style="text-decoration: none;color: white;">Confirm Home loan application</a></b></button></center><br><br>
+          </div>
+          </div>
+        </div>
+      </div>
+  <br><br><br><br>
+<!-- Footer -->
+<footer class="jumbotron footer">
+  <div class="team">&copy; Shimmy Shimmy Bank</div>
+  <div class="links">
+    <div class="img">
+      <a href="https://in.linkedin.com/" target="_blank">
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://x.com/" target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://telegram.org/" target="_blank">
+        <i class="fa fa-telegram"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://www.instagram.com/" target="_blank">
+        <i class="fa fa-instagram"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://wordpress.com/" target="_blank">
+        <i class="fa fa-wordpress"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

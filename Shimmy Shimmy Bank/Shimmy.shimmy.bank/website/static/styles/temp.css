@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+.container-fluid {
+  margin-top: 250px;
+}
+
+.card-body {
+  border-width: 0;
+  margin-top: px;
+  background-color: #ade6d8;
+  border: 5px solid #000000;
+}
+
+.row {
+  margin-bottom: 30px;
+}
+
+.card {
+  border-width: 0;
+  width: 500px; height: 280px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.h3class {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.form-body {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 20px;
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sub-form {
+  margin-top: 25px;
+}
+
+.form-body-2 {
+  display: flex;
+}
+
+.fields {
+  padding: 10px;
+  margin-top: -10px;
+}
+
+.fields label {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+
+input {
+  padding: 3px;
+}
+
+.btn {
+  width: 100%;
+  height: 100%;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.span {
+  color: red;
+}

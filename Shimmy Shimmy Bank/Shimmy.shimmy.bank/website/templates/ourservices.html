@@ -1,0 +1,144 @@
+#open an account-savings current fixed deposit
+#credit card- apply for a credit card- gen card no
+#loans- home loan and car loan
+#transactions-account to account within bank
+#transaction history table
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/styles/ourservices.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <title>Our Services</title>
+</head>
+<body style="background-color: #a0d5df;">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="nav navbar-nav">
+        <li><a href="/" class="nav-item nav-link nav-anchor active" id="home"><b>Home</b></a></li>
+        <li><a href="/ourservices" class="nav-item nav-link nav-anchor active" id="home"><b>Our services</b></a></li>
+        {% if "user" not in session %}
+          <li><a href="/signup" class="nav-item nav-link nav-anchor"><b>Sign Up</b></a></li>
+          <li><a href="/login" class="nav-item nav-link nav-anchor"><b>Log In</b></a></li>
+        {% endif %}
+        <li><a href="/logout" class="nav-item nav-link nav-anchor"><b>Log Out</b></a></li>
+        <!--li><a href="" class="nav-item nav-link nav-anchor" id="blogs">Blogs</a></li-->
+      </ul>
+    </div>
+  </nav>>
+  <!-- Content -->
+  <div class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="summary flex">
+            <div class="profile flex">
+            <img src="../static/images/indexeyes.png">
+                <div class="text-block">
+                  <h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Scroll down to view services</b></h1>
+                  <br><h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>↓</b></h1>
+                 </div>
+          </div></div></div></div></div>
+  <br><br><br>
+  <div class="card">
+    <div class="card-body">
+          <div>
+            {% if session.user.cb==-1 or session.user.sb==-1 %}
+              <h1 style="font-family: 'Courier New'"><center><b>OPEN AN ACCOUNT</b></center></h1>
+              <center><details><summary style="font-family: 'Courier New'"><b>Choose Account Type</b></summary>
+                <form method="POST" action="{{ url_for('views.confirm_acc') }}">
+                    <fieldset>
+                    <ul>
+                      {% if session.user.sb==-1 %}
+                        <li>
+                          <label for="savings"><font style="font-family: 'Courier New'">Savings Account</font><input type="checkbox" id="savings" name="account" value="savings" /></label>
+
+                        </li>
+                      {% endif %}
+                      {% if session.user.cb==-1 %}
+                        <li>
+                          <label for="current"><font style="font-family: 'Courier New'">Current Account</font><input type="checkbox" id="current" name="account" value="current" /></label>
+                        </li>
+                      {% endif %}
+                  </ul>
+                  </fieldset> 
+                  </details></center><br><br>
+                  <center><button  type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;"> Confirm Accounts</a></b></button></center><br><br>
+                </form>
+            {% endif %}
+          </div>
+          <div>
+            <h1 style="font-family: 'Courier New'"><center><b>APPLY FOR A CREDIT CARD</b></center></h1>
+            <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/cc">Apply Now</a></b></button></center><br><br>
+          </div>
+          <div>
+            <h1 style="font-family: 'Courier New'"><center><b>LOANS</b></center></h1>
+            <center><button type="button" class="btn btn-info" @click="submitForm"><b>Home Loan</b></button></center>
+            <center><button type="button" class="btn btn-info" @click="submitForm"><b>Car Loan</b></button></center><br><br>
+          </div>
+          <div>
+            <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION CENTER</b></center></h1>
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b>Transfer within Bank</b></button></center>
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b>Withdraw</b></button></center><br><br>
+          </div>
+          <div>
+            <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION HISTORY</b></center></h1>
+            {% if session.user.sb!=-1 and session.user.cb==-1 %}  
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistsav">View Saving Transactions</a></b></button></center>
+            {% elif session.user.cb!=-1 and session.user.sb==-1 %}
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistcur">View Current Transactions</a></b></button></center><br>
+            {% elif session.user.cb==-1 and session.user.sb==-1 %}
+              <p>Please create an account to view transaction history</p>
+            {% else %}
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistsav">View Saving Transactions</a></b></button></center>
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistcur">View Current Transactions</a></b></button></center><br>
+            {% endif %}
+          </div>
+          </div>
+        </div>
+      </div>
+  <br><br><br><br>
+<!-- Footer -->
+<footer class="jumbotron footer">
+  <div class="team">&copy; Shimmy Shimmy Bank</div>
+  <div class="links">
+    <div class="img">
+      <a href="https://in.linkedin.com/" target="_blank">
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://x.com/" target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://telegram.org/" target="_blank">
+        <i class="fa fa-telegram"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://www.instagram.com/" target="_blank">
+        <i class="fa fa-instagram"></i>
+      </a>
+    </div>
+    <div class="img">
+      <a href="https://wordpress.com/" target="_blank">
+        <i class="fa fa-wordpress"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
