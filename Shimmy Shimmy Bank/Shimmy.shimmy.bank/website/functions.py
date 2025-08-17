@@ -97,15 +97,17 @@ def get_info_login(user):
         return False
     
 def get_t_cb(user):
+    print("goodmorning")
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
-    try:
-        cursor.execute('select * from t_cb"{}" where cid ={}'.format(user['cid']))
-        data=cursor.fetchall()
-        mycon.close()
-        return data
-    except:
-        return False    
+    #try:
+    cursor.execute(f'select * from t_cb_{user["cid"]} where cid ="%s"'%(user['cid'],))
+    data=cursor.fetchall()
+    print("goodmorning")
+    mycon.close()
+    return data
+    #except:
+        #return False    
     
 def get_t_sb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')

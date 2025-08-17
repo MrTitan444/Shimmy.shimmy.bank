@@ -44,12 +44,13 @@ def cc():
 @views.route('/transhistcur')
 def transhistcur():
     l=get_t_cb(session['user'])
-    return render_template('transhistcur.html',l=l)
+    print("goodmorning")
+    return render_template('transhistcur.html',lasvegas=l)
 
 @views.route('/transhistsav')
 def transhistsav():
     l=get_t_sb(session['user'])
-    return render_template('transhistsav.html',l=l)
+    return render_template('transhistsav.html',lasvegas=l)
 
 @views.route('/carloan',methods=['GET'])
 def carloan():
