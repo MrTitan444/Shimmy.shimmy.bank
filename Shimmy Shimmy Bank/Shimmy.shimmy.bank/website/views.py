@@ -20,10 +20,11 @@ def confirm_acc():
     if "savings" in acc:
         session['user']['sb']=randint(10000,99999)
         add_sb(session['user'])
+        send_mail_sb(session['user'])
     if "current" in acc:
         session['user']['cb']=randint(10000,99999)
-        print(session)
         add_cb(session['user'])
+        send_mail_cb(session['user'])
     return render_template('ourservices.html')
 
 @views.route('/cc',methods=['POST'])

@@ -216,6 +216,7 @@ def send_mail_sb(user):
     user['sb_acc']=randint(10000,99999)
     subject='Creation of savings bank account'
     message=f'''Hello {user['email']}\nWe are happy to confirm your creation of your savings bank account under the customer id:{user['cid']}
+    The account number is : {user['sb']}
 Regards Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
     text=f'Subject:{subject}\n{message}'
@@ -233,9 +234,9 @@ def send_mail_cb(user):
     email='shimmy.shimmy.bank@gmail.com'
     a='ofbi nazq fwmd ujmr'
     cid=user['cid']
-    user['cb_acc']=randint(10000,99999)
     subject='Creation of current bank account'
     message=f'''Hello {user['email']}\nWe are happy to confirm your creation of your current bank account under the customer id:{user['cid']}
+    The account number is : {user['cb']}
 Regards Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
     text=f'Subject:{subject}\n{message}'
@@ -248,21 +249,3 @@ This is a system generated email please do not reply'''
     except:
         return False
     
-def send_mail_fd(user):
-    email='shimmy.shimmy.bank@gmail.com'
-    a='ofbi nazq fwmd ujmr'
-    cid=user['cid']
-    user['fd_acc']=randint(10000,99999)
-    subject='Creation of Fixed deposit account'
-    message=f'''Hello {user['email']}\nWe are happy to confirm your creation of your fixed deposit account under the customer id:{user['cid']}
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
-    text=f'Subject:{subject}\n{message}'
-    try:
-        server=smtplib.SMTP('smtp.gmail.com',587)
-        server.starttls()
-        server.login(email, a)
-        server.sendmail(email, user['email'], text)
-        return user
-    except:
-        return False

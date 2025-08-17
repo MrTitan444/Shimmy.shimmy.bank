@@ -5,7 +5,7 @@ create database shimmy_shimmy_bank;
 use shimmy_shimmy_bank;
 create table users(cid char(6) primary key, name varchar(25), aadhar char(16), email varchar(35), age int, password varchar(20),sb int default -1, cb int default -1);
 create table loans(cid char(6) references user(cid), hl char(3) default NULL, cl char(3) default NULL);
-insert into users values('0','shimmy',0,'shimmy_shimmy_bank@gmail.com',0,'shimmy');
+insert into users values('0','shimmy',0,'shimmy_shimmy_bank@gmail.com',0,'shimmy',-1,-1);
 
 
 
