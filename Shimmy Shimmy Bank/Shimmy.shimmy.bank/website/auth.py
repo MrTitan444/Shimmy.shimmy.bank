@@ -61,3 +61,7 @@ def logout():
     session.pop('user', None)
     flash('You have been logged out','info')
     return redirect(url_for('views.home'))   
+
+@auth.route('/update')
+def update_profile():
+    return render_template('update.html')
