@@ -56,6 +56,13 @@ def transhistsav():
 def carloan():
     return render_template('carloan.html')
 
+@views.route('carloan_btn',methods=['POST'])
+def carloan_btn():
+    tp={3:5,6:5.5,12:12,24:14,60:17,120:20,240:24}
+    amt=int(request.form('loan_amt'))
+    interest=request.form.getlist('time_period')
+
+
 @views.route('/homeloan',methods=['GET'])
 def homeloan():
     return render_template('homeloan.html')

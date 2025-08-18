@@ -60,19 +60,19 @@
               <li><b>Credit Score:</b> <b>A good credit score is essential.</b></li>
               <li><b>Vehicle Documents:</b> <b>You must have the necessary vehicle documents ready.</b></li>
             </ul>
-            <h3 style="font-family: 'Courier New'"><center><b>Interest rates are as follows:</b></center></h3>
+            <h3 style="font-family: 'Courier New'"><center><b>Interest rates and time periods are as follows:</b></center></h3>
             <ul style="font-family: 'Courier New'">
               <li><b>3 months:</b> 5% per annum</li>
               <li><b>6 months:</b> 5.5% per annum</li>
-              <li><b>1 year:</b> 12% per annum</li>
-              <li><b>2 years:</b> 14% per annum</li>
-              <li><b>5 years:</b> 17% per annum</li>
-              <li><b>10 years:</b> 20% per annum</li>
-              <li><b>20 years:</b> 24% per annum</li>
+              <li><b>12 months (1 year):</b> 12% per annum</li>
+              <li><b>24 months (2 years):</b> 14% per annum</li>
+              <li><b>60 months (5 years):</b> 17% per annum</li>
+              <li><b>120 months (10 years):</b> 20% per annum</li>
+              <li><b>240 months (20 years):</b> 24% per annum</li>
             </ul>
             <center><div class="form-group">
                   <label for="Amount" style="color: #4f5769;"><b>Enter Amount:</b></label>
-                  <input type="text" class="form-control" id="Amount" placeholder="Enter Amount" required>
+                  <input type="text" class="form-control" id="Amount" placeholder="Enter Amount" name="loan_amt" required>
                 </div></center>
               <center><details><summary style="font-family: 'Courier New'"><b>Choose time period</b></summary>
               <form>
@@ -102,9 +102,9 @@
                 </li>
              </ul>
             </fieldset>
+            <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="{{ url_for('views.carloan_btn') }}" style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center><br><br>
          </form>
         </details></center><br><br>
-          <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href=" " style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center><br><br>
           </div>
           </div>
         </div>

@@ -85,6 +85,19 @@ def add_cb(user):
         return False
 
 
+def add_c_loan(user):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    try:
+        cursor.execute('insert into loan')
+        data=list(cursor.fetchone())
+        a=['cid','email','sb','cb']
+        user=dict(zip(a,data))
+        mycon.close()
+        return user 
+    except:
+        return False
+
 def get_info_login(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
