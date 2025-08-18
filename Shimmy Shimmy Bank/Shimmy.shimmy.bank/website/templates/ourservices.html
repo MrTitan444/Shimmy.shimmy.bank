@@ -1,8 +1,3 @@
-#open an account-savings current fixed deposit
-#credit card- apply for a credit card- gen card no
-#loans- home loan and car loan
-#transactions-account to account within bank
-#transaction history table
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +22,10 @@
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="nav navbar-nav">
         <li><a href="/" class="nav-item nav-link nav-anchor active" id="home"><b>Home</b></a></li>
+        {% if "user" in session %}
         <li><a href="/ourservices" class="nav-item nav-link nav-anchor active" id="home"><b>Our services</b></a></li>
         <li><a href="/update" class="nav-item nav-link nav-anchor active" id="home"><b>Update Profile</b></a></li>
+        {% endif %}
         {% if "user" not in session %}
           <li><a href="/signup" class="nav-item nav-link nav-anchor"><b>Sign Up</b></a></li>
           <li><a href="/login" class="nav-item nav-link nav-anchor"><b>Log In</b></a></li>

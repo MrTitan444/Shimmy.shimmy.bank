@@ -17,6 +17,10 @@
   background: #555;
 }
 
+.navbar-nav .nav-link {
+  background-color: transparent;
+}
+
 /* Content */
 
 .summary {
