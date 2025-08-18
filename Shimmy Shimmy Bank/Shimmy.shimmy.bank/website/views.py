@@ -27,8 +27,12 @@ def confirm_acc():
         send_mail_cb(session['user'])
     return render_template('ourservices.html')
 
-@views.route('/cc',methods=['POST'])
+@views.route('/cc',methods=['GET'])
 def cc():
+    return render_template('cc.html')
+
+@views.route('/cc_btn',methods=['POST'])
+def cc_btn():
     ccn1=''
     cvv1=str(randint(100,999))
     t=date.today()
