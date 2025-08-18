@@ -100,9 +100,10 @@
                 <li>
                  <label for="20years"><font style="font-family: 'Courier New'">20 years</font><input type="radio" id="20years" name="time_period" value="20years" /></label>
                 </li>
+                <br><center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="{{ url_for('views.carloan_btn') }}" style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center>
              </ul>
             </fieldset>
-            <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="{{ url_for('views.carloan_btn') }}" style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center><br><br>
+            
          </form>
         </details></center><br><br>
           </div>
