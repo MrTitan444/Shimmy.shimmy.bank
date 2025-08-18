@@ -89,10 +89,19 @@ def add_c_loan(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     try:
-        cursor.execute('insert into loan')
-        data=list(cursor.fetchone())
-        a=['cid','email','sb','cb']
-        user=dict(zip(a,data))
+        cursor.execute('insert into loans(cid, cl, c_amt, c_tp, c_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
+        mycon.commit()
+        mycon.close()
+        return user 
+    except:
+        return False
+    
+def add_h_loan(user):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    try:
+        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
+        mycon.commit()
         mycon.close()
         return user 
     except:
@@ -265,3 +274,40 @@ This is a system generated email please do not reply'''
     except:
         return False
     
+def send_mail_c_loan(user):
+    email='shimmy.shimmy.bank@gmail.com'
+    a='ofbi nazq fwmd ujmr'
+    cid=user['cid']
+    subject='Confirmation of car loan'
+    message=f'''Hello {user['email']}\nWe are happy to confirm your Car loan under the customer id : {user['cid']}
+    The amount is : {user['loans']['amt']}
+Regards Shimmy Shimmy Bank Team
+This is a system generated email please do not reply'''
+    text=f'Subject:{subject}\n{message}'
+    try:
+        server=smtplib.SMTP('smtp.gmail.com',587)
+        server.starttls()
+        server.login(email, a)
+        server.sendmail(email, user['email'], text)
+        return user
+    except:
+        return False
+    
+def send_mail_h_loan(user):
+    email='shimmy.shimmy.bank@gmail.com'
+    a='ofbi nazq fwmd ujmr'
+    cid=user['cid']
+    subject='Confirmation of home loan'
+    message=f'''Hello {user['email']}\nWe are happy to confirm your Home loan under the customer id : {user['cid']}
+    The amount is : {user['loans']['amt']}
+Regards Shimmy Shimmy Bank Team
+This is a system generated email please do not reply'''
+    text=f'Subject:{subject}\n{message}'
+    try:
+        server=smtplib.SMTP('smtp.gmail.com',587)
+        server.starttls()
+        server.login(email, a)
+        server.sendmail(email, user['email'], text)
+        return user
+    except:
+        return False
