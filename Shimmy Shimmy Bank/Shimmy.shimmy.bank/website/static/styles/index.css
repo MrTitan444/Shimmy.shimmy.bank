@@ -49,7 +49,7 @@
     margin-bottom:-50px;
     margin: auto;
     width: 2249px;
-    height: 930px;
+    height: 950px;
 }
 
 
@@ -84,4 +84,27 @@
 
 .fa {
     color: #2bcbba;
+}
+
+ul {
+  background-color: transparent;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  border-radius: 3px;
+  margin: 0;
+  padding: 1px ;
+}
+
+ul li:hover {
+  background: #7784aa;
+}
+
+ul li label {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
 }

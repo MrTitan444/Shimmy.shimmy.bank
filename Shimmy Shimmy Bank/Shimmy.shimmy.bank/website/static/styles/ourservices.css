@@ -17,10 +17,6 @@
   background: #555;
 }
 
-.navbar-nav .nav-link {
-  background-color: transparent;
-}
-
 /* Content */
 
 .summary {
@@ -96,6 +92,7 @@ fieldset {
 
 
 ul {
+  background-color: transparent;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -104,11 +101,11 @@ ul {
 ul li {
   border-radius: 3px;
   margin: 0;
-  padding: 5px 2px;
+  padding: 1px ;
 }
 
 ul li:hover {
-  background: #eee;
+  background: #7784aa;
 }
 
 ul li label {
