@@ -97,7 +97,11 @@ def s_transfer_btn():
 
 @views.route('/c_transfer',methods=['GET'])
 def c_transfer():
-    return render_template('')
+    return render_template('c_transfer.html')
+
+@views.route('/c_transfer_btn',methods=['POST'])
+def c_transfer_btn():
+    return
 
 @views.route('/withdraw',methods=['GET'])
 def withdraw():
