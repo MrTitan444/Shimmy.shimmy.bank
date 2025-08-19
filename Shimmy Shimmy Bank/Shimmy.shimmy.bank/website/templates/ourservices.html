@@ -94,10 +94,10 @@
             {% if session.user.sb!=-1 or session.user.cb!=-1 %}
               {% if session.user.sb!=-1 %}
                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/s_transfer"> Transfer within Bank (Savings account) </a></b></button></center>
-                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/withdraw"> Withdraw </a></b></button></center><br><br>
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/withdraw"> Withdraw from Savings account </a></b></button></center>
               {% endif %}
               {% if session.user.cb!=-1 %}
-                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/c_transfer"> Transfer within Bank (Current account) </a></b></button></center>
+                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/c_transfer"> Transfer within Bank (Current account) </a></b></button></center><br>
               {% endif %}
             {% else %}
               <p>Please create an account to withdraw or transfer</p>
