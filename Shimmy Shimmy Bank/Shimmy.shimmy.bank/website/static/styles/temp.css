@@ -25,7 +25,7 @@ body {
 
 .card {
   border-width: 0;
-  width: 500px; height: 280px;
+  width: 500px; height: flex;
   display: flex;
   flex-direction: row;
   margin: auto;

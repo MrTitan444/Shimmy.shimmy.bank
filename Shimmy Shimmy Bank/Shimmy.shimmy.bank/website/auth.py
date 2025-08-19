@@ -2,8 +2,9 @@ from flask import Blueprint, render_template, jsonify, request, url_for, redirec
 from website.functions import *
 import mysql.connector as sqltor
 c=r=0
-l_user,user={},{}
-
+l_user={};user={}
+mycon=sqltor.connect(host='localhost', user='root1', password='12345', database='shimmy_shimmy_bank')
+cursor=mycon.cursor()
 auth=Blueprint('auth', __name__)
 
 @auth.route('/login',methods=['GET'])
@@ -18,7 +19,16 @@ def login_btn():
         session['user']=s
         return redirect(url_for('views.home'))
     else:
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('views.home'))
+
+@auth.route('/update_btn',methods=['POST'])
+def update_btn():
+    l_user['aadhaar'],l_user['password'],l_user['name']=request.form['l_aadhaar'],request.form['l_password'],request.form['name']
+    print(session['user']['cid'])
+    cursor.execute("update users set name=%s, aadhar=%s, password=%s where cid=%s",(l_user['name'], l_user['aadhaar'], l_user['password'], session['user']['cid']))
+    mycon.commit()
+    print(l_user)
+    return redirect(url_for('views.home'))
 
 @auth.route('/signup', methods=['GET'])
 def signup():
@@ -48,6 +58,7 @@ def verify_btn():
     if o==r:
         add_user_sql(user)
         send_mail_acc(user)
+        user['cb'],user['sb']=-1,-1 
         session['user']=user
         print(user)
         flash('You have been logged in','info')

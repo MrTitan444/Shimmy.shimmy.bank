@@ -30,9 +30,7 @@ def add_user_sql(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     try:
-        s='create table transactions_%s(cid char(6) references user(cid) on delete cascade on update cascade, date date, particulars varchar(100), withdrawal int, deposit int, balance int)' %(user['cid'])
-        cursor.execute("insert into users(cid, name, aadhar, email, age, password) values(%s, %s, %s, %s, %s, %s)", (user['cid'], user['name'], user['aadhaar'], user['email'], str(user['age']), user['password']))
-        cursor.execute(s)
+        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], str(user['age']), user['password']))
         mycon.commit()
         mycon.close()
         return user
