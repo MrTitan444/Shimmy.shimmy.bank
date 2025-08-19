@@ -1,3 +1,4 @@
+{ % extends "index.html" % }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +26,7 @@
         {% if "user" in session %}
         <li><a href="/ourservices" class="nav-item nav-link nav-anchor active" id="home"><b>Our services</b></a></li>
         <li><a href="/update" class="nav-item nav-link nav-anchor active" id="home"><b>Update Profile</b></a></li>
+        <li><a href="/delete" class="nav-item nav-link nav-anchor active" id="home"><b>Delete Profile</b></a></li>
         {% endif %}
         {% if "user" not in session %}
           <li><a href="/signup" class="nav-item nav-link nav-anchor"><b>Sign Up</b></a></li>
@@ -34,7 +36,7 @@
         <!--li><a href="" class="nav-item nav-link nav-anchor" id="blogs">Blogs</a></li-->
       </ul>
     </div>
-  </nav>>
+  </nav>
   <!-- Content -->
   <div class="hero">
     <div class="container">
