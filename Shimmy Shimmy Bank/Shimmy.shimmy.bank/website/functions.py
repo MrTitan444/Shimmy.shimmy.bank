@@ -61,8 +61,8 @@ def add_sb(user):
    ## try:
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     print('executed one cursor statemnt')
-    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) references users(cid) on delete cascade on update cascade ,sb int references users(sb) on delete cascade on update cascade, date date, ToWhom varchar(25) default NULL ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-    cursor.execute(f'insert into t_sb_{user["cid"]}(sb) values(%s)'%(user['sb'],))
+    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) references user(cid) on delete cascade on update cascade,sb int references users(sb) on delete cascade on update cascade, date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
+    cursor.execute(f'insert into t_sb_{user["cid"]}(cid,sb) values(%s)'%(user['cid'],user['sb'],))
     mycon.commit()
     mycon.close()
     flash('Savings account succesfully created!!','info')
@@ -70,19 +70,6 @@ def add_sb(user):
     ##except:
         #####return False
     
-def add_cb(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
-    try:
-        cursor.execute('update users set cb=%s where cid="%s"'%(user['cb'],user['cid']))
-        cursor.execute(f'create table t_cb_{user['cid']}(cid char(6) references users(cid) on delete cascade on update cascade,cb int references users(cb) on update cascade on delete cascade, date date, ToWhom varchar(25) default NULL, amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-        cursor.execute(f'insert into t_sb_{user["cid"]}(cb) values(%s)'%(user['cb'],))
-        mycon.commit()
-        mycon.close()
-        flash('Current account succesfully created!!','info')
-        return user
-    except:
-        return False
 
 
 def add_c_loan(user):
@@ -120,18 +107,6 @@ def get_info_login(user):
     except:
         return False
     
-def get_t_cb(user):
-    print("goodmorning")
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
-    #try:
-    cursor.execute(f'select * from t_cb_{user["cid"]} where cid ="%s"'%(user['cid'],))
-    data=cursor.fetchall()
-    print("goodmorning")
-    mycon.close()
-    return data
-    #except:
-        #return False    
     
 def get_t_sb(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
@@ -157,18 +132,6 @@ def add_ccn(cn,cid):
         return False    
 
 
-def check_cb(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
-    try:
-        cursor.execute('select cb from users where cid="{}"'.format(user['cid']))
-        d=int(cursor.fetchone())
-        if d!=-1:
-            session['user']['cb']=d    
-        mycon.close()
-        return user
-    except:
-        return False
     
 
 def check_sb(user):
@@ -184,7 +147,48 @@ def check_sb(user):
     except:
         return False
     
-
+def check_sb_t(user):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    try:
+        cursor.execute('select sb form users where cid="{}"'.format(user))
+        d=int(cursor.fetchone())
+        mycon.close()
+        if d:
+            return user    
+        else:
+            flash('Savings bank account not found','error')
+            return False
+    except:
+        return False
+    
+def sb_t(reciever,amt,user):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    try:
+        cursor.execute(f'select balance from t_sb_{user['cid']}')
+        a=int(cursor.fetchone())
+        cursor.execute(f'select * from t_sb_{reciever}')
+        s=cursor.fetchone()
+        if not s:
+            flash('Account holder not found','error')
+            return False
+        if a<amt:
+            flash('Insuffecient funds','error')
+        else:
+            #cid, sb, date, amt, part,bal
+            cursor.execute(f'insert into t_sb_{user['cid']} values("{user['cid']}",{int(user['sb'])},curdate(),{int(amt)},2, {int(a-amt)})')
+            print(1)
+            cursor.execute(f'insert into t_sb_{reciever} values("{a[0]}",{int(reciever)},curdate(),{int(amt)},1,{int(amt+a[3])})')
+            print(2)
+            mycon.commit()
+            print('commited')
+            mycon.close()
+            return True
+    except: 
+        print('error')   
+        return False
+    
 
 #smtp fns
 

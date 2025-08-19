@@ -48,6 +48,7 @@ def verify_btn():
     if o==r:
         add_user_sql(user)
         send_mail_acc(user)
+        user['sb']=-1
         session['user']=user
         print(user)
         flash('You have been logged in','info')

@@ -21,11 +21,7 @@ def confirm_acc():
         session['user']['sb']=randint(10000,99999)
         add_sb(session['user'])
         send_mail_sb(session['user'])
-    if "current" in acc:
-        session['user']['cb']=randint(10000,99999)
-        add_cb(session['user'])
-        send_mail_cb(session['user'])
-    return render_template('ourservices.html')
+    return redirect(url_for('views.ourservices'))
 
 @views.route('/cc',methods=['GET'])
 def cc():
@@ -45,11 +41,6 @@ def cc_btn():
     add_ccn(cn,session['user']['cid'])
     return redirect(url_for('views.ourservices'))
 
-@views.route('/transhistcur')
-def transhistcur():
-    l=get_t_cb(session['user'])
-    print("goodmorning")
-    return render_template('transhistcur.html',lasvegas=l)
 
 @views.route('/transhistsav')
 def transhistsav():
@@ -79,29 +70,32 @@ def homeloan():
 @views.route('/homeloan_btn',methods=['POST'])
 def homeloan_btn():
     interest={3:5,6:5.5,12:12,24:14,60:17,120:20,240:24}
-    amt=int(request.form('loan_amt'))
-    tp=request.form.getlist('time_period')
+    amt=int(request.form['loan_amt'])
+    tp=request.form.getlist['time_period']
     h_loan_details={'amt':amt,'tp':tp,'interest':interest[tp]}
     session['user']['loans']=h_loan_details
     add_h_loan(session['user'])
     send_mail_h_loan(session['user'])
     return redirect(url_for('views.ourservices'))
 
-@views.route('/s_transfer',methods=['GET'])
-def s_transfer():
+@views.route('/transfer',methods=['GET'])
+def transfer():
     return render_template('transfer.html')
 
-@views.route('s_transfer_btn',methods=['POST'])
+@views.route('/s_transfer_btn',methods=['POST'])
 def s_transfer_btn():
-    return 
+    s_amt=int(request.form['s_transfer_amt'])
+    s_no=request.form['s_no']
+    # reciever amt user
+    #transfer not wrokin
+    t=sb_t(s_no,s_amt,session['user'])
+    if t:
+        print('success')
+        flash('Successfully Transfared','info')
+    else:
+        flash('Error','Error')
+    return render_template('transfer.html')
 
-@views.route('/c_transfer',methods=['GET'])
-def c_transfer():
-    return render_template('c_transfer.html')
-
-@views.route('/c_transfer_btn',methods=['POST'])
-def c_transfer_btn():
-    return
 
 @views.route('/withdraw',methods=['GET'])
 def withdraw():

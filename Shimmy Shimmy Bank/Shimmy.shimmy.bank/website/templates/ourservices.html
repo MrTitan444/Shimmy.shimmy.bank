@@ -52,23 +52,16 @@
   <div class="card">
     <div class="card-body">
           <div>
-            {% if session.user.cb==-1 or session.user.sb==-1 %}
+            {% if session.user.sb==-1 %}
               <h1 style="font-family: 'Courier New'"><center><b>OPEN AN ACCOUNT</b></center></h1>
               <center><details><summary style="font-family: 'Courier New'"><b>Choose Account Type</b></summary>
                 <form method="POST" action="{{ url_for('views.confirm_acc') }}">
                     <fieldset>
                     <ul>
-                      {% if session.user.sb==-1 %}
                         <li>
                           <label for="savings"><font style="font-family: 'Courier New'">Savings Account</font><input type="checkbox" id="savings" name="account" value="savings" /></label>
 
                         </li>
-                      {% endif %}
-                      {% if session.user.cb==-1 %}
-                        <li>
-                          <label for="current"><font style="font-family: 'Courier New'">Current Account</font><input type="checkbox" id="current" name="account" value="current" /></label>
-                        </li>
-                      {% endif %}
                   </ul>
                   </fieldset> 
                   </details></center><br><br>
@@ -91,29 +84,19 @@
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION CENTER</b></center></h1>
-            {% if session.user.sb!=-1 or session.user.cb!=-1 %}
-              {% if session.user.sb!=-1 %}
-                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/s_transfer"> Transfer within Bank (Savings account) </a></b></button></center>
-                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/withdraw"> Withdraw from Savings account </a></b></button></center>
-              {% endif %}
-              {% if session.user.cb!=-1 %}
-                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/c_transfer"> Transfer within Bank (Current account) </a></b></button></center><br>
-              {% endif %}
+            {% if session.user.sb!=-1 %}
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transfer"> Transfer within Bank  </a></b></button></center>
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/withdraw"> Withdraw </a></b></button></center>
             {% else %}
               <p>Please create an account to withdraw or transfer</p>
             {% endif %}
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>TRANSACTION HISTORY</b></center></h1>
-            {% if session.user.sb!=-1 and session.user.cb==-1 %}  
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistsav">View Saving Transactions</a></b></button></center>
-            {% elif session.user.cb!=-1 and session.user.sb==-1 %}
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistcur">View Current Transactions</a></b></button></center><br>
-            {% elif session.user.cb==-1 and session.user.sb==-1 %}
-              <p>Please create an account to view transaction history</p>
+            {% if session.user.sb!=-1 %}  
+              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistsav">View Transactions</a></b></button></center>
             {% else %}
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistsav">View Saving Transactions</a></b></button></center>
-              <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transhistcur">View Current Transactions</a></b></button></center><br>
+              <p>Please create an account to view transaction history</p>
             {% endif %}
           </div>
           </div>

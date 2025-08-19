@@ -38,20 +38,18 @@
     <div class="card-body">
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>TRANSFER FROM SAVINGS ACCOUNT</b></center></h1>
-            <form>
+            <form method="post" action="{{ url_for('views.s_transfer_btn') }}">
                 <center><div class="form-group">
                   <label for="amount" style="color: #4f5769;"><b>Enter amount:</b></label>
-                  <input type="text" class="form-control" id="amount" placeholder="Enter amount" required>
+                  <input type="text" class="form-control" id="amount" placeholder="Enter amount" required name="s_transfer_amt">
                 </div></center>
-            </form>
-            <form>
                 <center><div class="form-group">
-                  <label for="recipientAccount" style="color: #4f5769;"><b>Enter recipient's Customer ID:</b></label>
-                  <input type="text" class="form-control" id="recipientAccount" placeholder="Enter recipient's Customer ID" required>
+                  <label for="recipientAccount" style="color: #4f5769;"><b>Enter recipient's bank savings bank account number :</b></label>
+                  <input type="text" class="form-control" id="recipientAccount" placeholder="Enter recipient's Customer ID" name="s_no" required>
                 </div></center> 
+                <center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br><br>
             </form>
             <br>
-          <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href=" " style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br><br>
           </div>
           </div>
         </div>
