@@ -87,9 +87,17 @@ def homeloan_btn():
     send_mail_h_loan(session['user'])
     return redirect(url_for('views.ourservices'))
 
-@views.route('/transfer',methods=['GET'])
-def transfer():
+@views.route('/s_transfer',methods=['GET'])
+def s_transfer():
     return render_template('transfer.html')
+
+@views.route('s_transfer_btn',methods=['POST'])
+def s_transfer_btn():
+    return 
+
+@views.route('/c_transfer',methods=['GET'])
+def c_transfer():
+    return render_template('')
 
 @views.route('/withdraw',methods=['GET'])
 def withdraw():
