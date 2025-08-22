@@ -30,7 +30,7 @@ def add_user_sql(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     try:
-        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], str(user['age']), user['password']))
+        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
         mycon.commit()
         mycon.close()
         return user
@@ -59,8 +59,7 @@ def add_sb(user):
    ## try:
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     print('executed one cursor statemnt')
-    cursor.execute(f'create table t_sb_{user["cid"]}(cid char(6) references user(cid) on delete cascade on update cascade,sb int references users(sb) on delete cascade on update cascade, date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0)')
-    cursor.execute(f'insert into t_sb_{user["cid"]}(cid,sb) values(%s)'%(user['cid'],user['sb'],))
+    cursor.execute(f'create table t_sb_{user["cid"]}(date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
     mycon.commit()
     mycon.close()
     flash('Savings account succesfully created!!','info')
@@ -96,9 +95,9 @@ def get_info_login(user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
     try:
-        cursor.execute('select cid, email, sb, cb from users where cid ={}'.format(user['cid']))
+        cursor.execute('select cid, email, sb from users where cid ={}'.format(user['cid']))
         data=list(cursor.fetchone())
-        a=['cid','email','sb','cb']
+        a=['cid','email','sb']
         user=dict(zip(a,data))
         mycon.close()
         return user 
@@ -159,34 +158,33 @@ def check_sb_t(user):
             return False
     except:
         return False
-    
+
 def sb_t(reciever,amt,user):
     mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
     cursor=mycon.cursor()
-    try:
-        cursor.execute(f'select balance from t_sb_{user['cid']}')
-        a=int(cursor.fetchone())
-        cursor.execute(f'select * from t_sb_{reciever}')
-        s=cursor.fetchone()
-        if not s:
-            flash('Account holder not found','error')
-            return False
-        if a<amt:
-            flash('Insuffecient funds','error')
-        else:
-            #cid, sb, date, amt, part,bal
-            cursor.execute(f'insert into t_sb_{user['cid']} values("{user['cid']}",{int(user['sb'])},curdate(),{int(amt)},2, {int(a-amt)})')
-            print(1)
-            cursor.execute(f'insert into t_sb_{reciever} values("{a[0]}",{int(reciever)},curdate(),{int(amt)},1,{int(amt+a[3])})')
-            print(2)
-            mycon.commit()
-            print('commited')
-            mycon.close()
-            return True
-    except: 
-        print('error')   
+    cursor.execute(f'select balance from t_sb_{user["cid"]}')
+    a=cursor.fetchall()[-1]
+    a=a[0]
+    if amt>a:
+        flash('Insuffecient funds','i_f')
         return False
-    
+    else:
+        #table - date, amt, particular, balance,cid
+        tid=randint(1000,9999)
+        q=f'insert into t_sb_{user['cid']}'
+        q+=' values(curdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
+        cursor.execute(q)
+        cursor.execute(f'select balance from t_sb_{reciever}')
+        z=cursor.fetchone()
+        if not z:
+            z=0
+        q=f'insert into t_sb_{reciever}'
+        q+=' values(curdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
+        cursor.execute(q)
+        mycon.commit()
+        mycon.close()
+    flash('Transfered successfully')
+    return True
 
 #smtp fns
 
