@@ -254,25 +254,6 @@ This is a system generated email please do not reply'''
     except:
         return False
     
-
-def send_mail_cb(user):
-    email='shimmy.shimmy.bank@gmail.com'
-    a='ofbi nazq fwmd ujmr'
-    cid=user['cid']
-    subject='Creation of current bank account'
-    message=f'''Hello {user['email']}\nWe are happy to confirm your creation of your current bank account under the customer id:{user['cid']}
-    The account number is : {user['cb']}
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
-    text=f'Subject:{subject}\n{message}'
-    try:
-        server=smtplib.SMTP('smtp.gmail.com',587)
-        server.starttls()
-        server.login(email, a)
-        server.sendmail(email, user['email'], text)
-        return user
-    except:
-        return False
     
 def send_mail_c_loan(user):
     email='shimmy.shimmy.bank@gmail.com'
@@ -300,6 +281,25 @@ def send_mail_h_loan(user):
     subject='Confirmation of home loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Home loan under the customer id : {user['cid']}
     The amount is : {user['loans']['amt']}
+Regards Shimmy Shimmy Bank Team
+This is a system generated email please do not reply'''
+    text=f'Subject:{subject}\n{message}'
+    try:
+        server=smtplib.SMTP('smtp.gmail.com',587)
+        server.starttls()
+        server.login(email, a)
+        server.sendmail(email, user['email'], text)
+        return user
+    except:
+        return False
+    
+def send_mail_t(user,amt):
+    email='shimmy.shimmy.bank@gmail.com'
+    a='ofbi nazq fwmd ujmr'
+    cid=user['cid']
+    subject='Confirmation of transaction'
+    message=f'''Hello {user['email']}
+    A withdrawal of Rs{amt} has taken place.
 Regards Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
     text=f'Subject:{subject}\n{message}'

@@ -92,6 +92,7 @@ def s_transfer_btn():
     if t:
         print('success')
         flash('Successfully Transfared','info')
+        send_mail_t(session['user'],s_amt)
     else:
         flash('Error','Error')
     return render_template('transfer.html')
@@ -100,6 +101,10 @@ def s_transfer_btn():
 @views.route('/withdraw',methods=['GET'])
 def withdraw():
     return render_template('withdraw.html')
+
+@views.route('/withdraw_btn',methods=['POST'])
+def withdraw_btn():
+    pass
 
 @views.route('/deposit',methods=['GET'])
 def deposit():
