@@ -38,25 +38,18 @@
     <div class="card-body">
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>WITHDRAW</b></center></h1>
-            <form method="post" action="{{  }}">
+            <form method="post" action="{{ url_for('views.s_transfer_btn') }}">
                 <center><div class="form-group">
                   <label for="amount" style="color: #4f5769;"><b>Enter amount:</b></label>
-                  <input type="text" class="form-control" id="amount" placeholder="Enter amount" required>
+                  <input type="text" class="form-control" id="amount" placeholder="Enter amount" name="amt" required>
                 </div></center>
+                <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br>
             </form>
-            <form>
-                <center><div class="form-group">
-                  <label for="recipientAccount" style="color: #4f5769;"><b>Enter your Customer ID:</b></label>
-                  <input type="text" class="form-control" id="recipientAccount" placeholder="Enter your Customer ID" required>
-                </div></center> 
-            </form>
-            <br>
-          <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href=" " style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br><br>
           </div>
           </div>
         </div>
       </div>
-  <br><br><br><br>  <br><br><br><br>  <br><br><br>  <br>
+  <br><br><br>  <br><br><br><br>  <br><br><br>  <br>
 <!-- Footer -->
 <footer class="jumbotron footer">
   <div class="team">&copy; Shimmy Shimmy Bank</div>

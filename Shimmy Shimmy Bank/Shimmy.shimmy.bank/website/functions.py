@@ -186,6 +186,40 @@ def sb_t(reciever,amt,user):
     flash('Transfered successfully')
     return True
 
+def withdraw(user,amt):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    cursor.execute(f'select balance from t_sb_{user["cid"]}')
+    a=cursor.fetchall()[-1]
+    a=a[0]
+    if amt>a:
+        flash('Insuffecient funds','i_f')
+        return False
+    else:
+        #table - date, amt, particular, balance,cid
+        tid=randint(1000,9999)
+        q=f'insert into t_sb_{user['cid']}'
+        q+=' values(curdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
+        cursor.execute(q)
+        mycon.commit()
+        mycon.close()
+    flash('Withdrawn successfully')
+    return True
+
+def deposit(user,amt):
+    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+    cursor=mycon.cursor()
+    tid=randint(1000,9999)
+    cursor.execute(f'select balance from t_sb_{user["cid"]}')
+    a=cursor.fetchall()[-1]
+    a=a[0]
+    q=f'insert into t_sb_{user['cid']}'
+    q+=' values(curdate(),%s,1,%s,%s)'%(amt,a+amt,tid)
+    cursor.execute(q)
+    mycon.commit()
+    mycon.close()
+
+
 #smtp fns
 
 

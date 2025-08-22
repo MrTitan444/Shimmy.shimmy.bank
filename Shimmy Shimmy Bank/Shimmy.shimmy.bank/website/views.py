@@ -5,6 +5,16 @@ from datetime import date
 views = Blueprint('views', __name__)
 
 
+
+
+
+# Still need to finish flashes 
+
+
+
+
+
+
 @views.route('/')
 def home():
     return render_template('index.html')
@@ -104,8 +114,16 @@ def withdraw():
 
 @views.route('/withdraw_btn',methods=['POST'])
 def withdraw_btn():
-    pass
+    amt=request.form['amt']
+    withdraw(session['user'],amt)
+    return render_template('withdraw.html')
 
 @views.route('/deposit',methods=['GET'])
 def deposit():
+    return render_template('deposit.html')
+
+@views.route('/deposit_btn',methods=['POST'])
+def deposit_btn():
+    amt=request.form['amt']
+    deposit(session['user'],amt)
     return render_template('deposit.html')
