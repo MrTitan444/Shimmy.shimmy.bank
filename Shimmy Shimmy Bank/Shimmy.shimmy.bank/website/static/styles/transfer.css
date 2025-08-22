@@ -36,7 +36,7 @@
 
 .card {
   top: 100px;
-  width: 700px; height: 375px;
+  width: 700px; height: flex;
   display: flex;
   flex-direction: row;
   margin: auto;

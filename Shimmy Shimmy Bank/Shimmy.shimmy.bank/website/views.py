@@ -100,3 +100,7 @@ def s_transfer_btn():
 @views.route('/withdraw',methods=['GET'])
 def withdraw():
     return render_template('withdraw.html')
+
+@views.route('/deposit',methods=['GET'])
+def deposit():
+    return render_template('deposit.html')

@@ -54,7 +54,6 @@
   <div class="card">
     <div class="card-body">
           <div>
-            {{ session }}
             {% if session.user.sb==-1 %}
               <h1 style="font-family: 'Courier New'"><center><b>OPEN AN ACCOUNT</b></center></h1>
               <center><details><summary style="font-family: 'Courier New'"><b>Choose Account Type</b></summary>
@@ -90,6 +89,7 @@
             {% if session.user.sb!=-1 %}
                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/transfer"> Transfer within Bank  </a></b></button></center>
                 <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/withdraw"> Withdraw </a></b></button></center>
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/deposit"> Deposit </a></b></button></center><br>
             {% else %}
               <p>Please create an account to withdraw or transfer</p>
             {% endif %}

@@ -11,7 +11,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <title>Transfer from Savings account</title>
+  <title>Deposit to account</title>
 </head>
 <body style="background-color: #a0d5df;">
   <!-- Navbar -->
@@ -37,24 +37,20 @@
   <div class="card">
     <div class="card-body">
           <div>
-            <h1 style="font-family: 'Courier New'"><center><b>{% block trans %}TRANSFER FROM SAVINGS ACCOUNT{% endblock %}</b></center></h1>
+            <h1 style="font-family: 'Courier New'"><center><b>{% block trans %}DEPOSIT INTO ACCOUNT{% endblock %}</b></center></h1>
             <form method="post" action="{{ url_for('views.s_transfer_btn') }}">
                 <center><div class="form-group">
                   <label for="amount" style="color: #4f5769;"><b>{% block amount %}Enter amount:{% endblock %}</b></label>
                   <input type="text" class="form-control" id="amount" placeholder="Enter amount" required name="s_transfer_amt">
                 </div></center>
-                <center><div class="form-group">
-                  <label for="recipientAccount" style="color: #4f5769;"><b>{% block recep %}Enter recipient's bank savings bank account number :{% endblock %}</b></label>
-                  <input type="text" class="form-control" id="recipientAccount" placeholder="Enter recipient's Savings bank number" name="s_no" required>
-                </div></center> 
-                {% block submit %}<center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br><br>{% endblock %}
+                {% block submit %}<center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center>{% endblock %}
             </form>
             <br>
           </div>
           </div>
         </div>
       </div>
-  <br><br><br><br>  <br><br><br><br>  <br><br><br>  <br>
+  <br><br><br><br>  <br><br><br><br>  <br><br><br>  <br> <br><br><br>  <br> <br><br><br>
 <!-- Footer -->
 <footer class="jumbotron footer">
   <div class="team">&copy; Shimmy Shimmy Bank</div>
