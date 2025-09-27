@@ -25,21 +25,28 @@ def chpwd(pwd):
     
 
 #sql fns
- 
-def add_user_sql(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
+
+mycon=cursor=None
+
+def s_sql():
+    global mycon,cursor
+    mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
     cursor=mycon.cursor()
+    return mycon,cursor
+
+
+def c_sql():
+    mycon.close()
+
+def add_user_sql(user):
     try:
         cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
-        mycon.commit()
-        mycon.close()
+        
         return user
     except:
         return False
 
 def check_login(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute('select cid, password from users where cid={}'.format(user['cid'],user['password']))
         data=cursor.fetchone()
@@ -52,77 +59,52 @@ def check_login(user):
     except:
         return False
     
-def add_sb(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
+def add_sb(user):    
     print('inside add_sb')
-   ## try:
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     print('executed one cursor statemnt')
     cursor.execute(f'create table t_sb_{user["cid"]}(date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
-    mycon.commit()
-    mycon.close()
     flash('Savings account succesfully created!!','info')
     return user
-    ##except:
-        #####return False
     
 
 
-def add_c_loan(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
+def add_c_loan(user):  
     try:
         cursor.execute('insert into loans(cid, cl, c_amt, c_tp, c_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
-        mycon.commit()
-        mycon.close()
         return user 
     except:
         return False
     
-def add_h_loan(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
+def add_h_loan(user): 
     try:
-        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
-        mycon.commit()
-        mycon.close()
+        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))      
         return user 
     except:
         return False
 
 def get_info_login(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute('select cid, email, sb from users where cid ={}'.format(user['cid']))
         data=list(cursor.fetchone())
         a=['cid','email','sb']
         user=dict(zip(a,data))
-        mycon.close()
         return user 
     except:
         return False
     
     
 def get_t_sb(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute(f'select * from t_sb_{user["cid"]} where cid ="%s"'%(user['cid'],))
         data=cursor.fetchall()
-        mycon.close()
         return data
     except:
         return False        
 
 def add_ccn(cn,cid):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute('insert into cc values({},{},{},{}) where cid={}'.format(cid,cn['ccn'],cn['cvv'],cn['valid'],cid))
-        mycon.commit()
-        mycon.close()
         flash('Succesuflly generated credit card')
         return True
     except:
@@ -132,25 +114,19 @@ def add_ccn(cn,cid):
     
 
 def check_sb(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute('select sb form users where cid="{}"'.format(user['cid']))
         d=int(cursor.fetchone())
         if d!=-1:
             session['user']['sb']=d    
-        mycon.close()
         return user
     except:
         return False
     
 def check_sb_t(user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     try:
         cursor.execute('select sb form users where cid="{}"'.format(user))
         d=int(cursor.fetchone())
-        mycon.close()
         if d:
             return user    
         else:
@@ -160,8 +136,6 @@ def check_sb_t(user):
         return False
 
 def sb_t(reciever,amt,user):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
     a=a[0]
@@ -181,14 +155,10 @@ def sb_t(reciever,amt,user):
         q=f'insert into t_sb_{reciever}'
         q+=' values(curdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
         cursor.execute(q)
-        mycon.commit()
-        mycon.close()
     flash('Transfered successfully')
     return True
 
 def withdraw(user,amt):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
     a=a[0]
@@ -201,14 +171,10 @@ def withdraw(user,amt):
         q=f'insert into t_sb_{user['cid']}'
         q+=' values(curdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
         cursor.execute(q)
-        mycon.commit()
-        mycon.close()
     flash('Withdrawn successfully')
     return True
 
 def deposit(user,amt):
-    mycon=sqltor.connect(host='localhost', user='root1', password='12345',database='shimmy_shimmy_bank')
-    cursor=mycon.cursor()
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
@@ -216,8 +182,8 @@ def deposit(user,amt):
     q=f'insert into t_sb_{user['cid']}'
     q+=' values(curdate(),%s,1,%s,%s)'%(amt,a+amt,tid)
     cursor.execute(q)
-    mycon.commit()
-    mycon.close()
+    
+    
 
 
 #smtp fns

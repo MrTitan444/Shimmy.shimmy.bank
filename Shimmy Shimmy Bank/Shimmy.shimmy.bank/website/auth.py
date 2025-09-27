@@ -14,6 +14,7 @@ def login():
 @auth.route('/login_btn',methods=['POST'])
 def login_btn():
     l_user['cid'],l_user['password']=request.form['l_cid'],request.form['l_password']
+    s_sql()
     if check_login(l_user):
         s=get_info_login(l_user)
         session['user']=s
@@ -56,6 +57,7 @@ def verify():
 def verify_btn():
     o=int(request.form['otp'])
     if o==r:
+        s_sql()
         add_user_sql(user)
         send_mail_acc(user)
         user['sb']=-1
@@ -69,6 +71,7 @@ def verify_btn():
 
 @auth.route('/logout')
 def logout():
+    c_sql()
     session.pop('user', None)
     flash('You have been logged out','info')
     return redirect(url_for('views.home'))   
