@@ -70,35 +70,6 @@
       </div>
   <br><br><br><br>  <br><br><br><br>  <br><br><br><br>
 <!-- Footer -->
-<footer class="jumbotron footer">
-  <div class="team">&copy; Shimmy Shimmy Bank</div>
-  <div class="links">
-    <div class="img">
-      <a href="https://in.linkedin.com/" target="_blank">
-        <i class="fa fa-linkedin-square"></i>
-      </a>
-    </div>
-    <div class="img">
-      <a href="https://x.com/" target="_blank">
-        <i class="fa fa-twitter"></i>
-      </a>
-    </div>
-    <div class="img">
-      <a href="https://telegram.org/" target="_blank">
-        <i class="fa fa-telegram"></i>
-      </a>
-    </div>
-    <div class="img">
-      <a href="https://www.instagram.com/" target="_blank">
-        <i class="fa fa-instagram"></i>
-      </a>
-    </div>
-    <div class="img">
-      <a href="https://wordpress.com/" target="_blank">
-        <i class="fa fa-wordpress"></i>
-      </a>
-    </div>
-  </div>
-</footer>
+{% block footer %}{{ super() }}{% endblock %}
 </body>
 </html>
