@@ -95,12 +95,16 @@ def get_info_login(user):
     
     
 def get_t_sb(user):
-    try:
-        cursor.execute(f'select * from t_sb_{user["cid"]} where cid ="%s"'%(user['cid'],))
-        data=cursor.fetchall()
-        return data
-    except:
-        return False        
+    ##try:
+    mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
+    cursor=mycon.cursor()
+    print("enter")
+    print(user['cid'])
+    cursor.execute('select * from t_sb_{}'.format(user['cid']))
+    data=cursor.fetchall()
+    return data
+    ##except:
+       ## return []
 
 def add_ccn(cn,cid):
     try:

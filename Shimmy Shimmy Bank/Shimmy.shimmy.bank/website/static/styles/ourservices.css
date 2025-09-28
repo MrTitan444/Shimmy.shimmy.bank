@@ -1,22 +1,3 @@
-/* Webkit */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 /* Content */
 
 .summary {
@@ -29,17 +10,27 @@
     display: flex;
     align-items: center;
     margin: auto;
-    width: 2249px;
-    height: 950px;
+    width: calc(100vw + 370px);
+    height: 100vh;
 }
-.text-block {
+
+.text-block h1{
   position: absolute;
-  bottom: 50px;
-  right: 0px;
+  width:600px;
+  height: 200px;
+  right: 100px;
+  bottom: -500px;
   background-color: transparent;
   text-align: center;
   color: rgb(0, 0, 0);
 
+}
+
+.text-block {
+  height: 400px;
+  position: absolute;
+  background-color: transparent;
+  text-align: center;
 }
 
 .btn {
@@ -112,41 +103,4 @@ ul li label {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-}
-
-
-
-
-
-/* Footer */
-
-.jumbotron.footer {
-    background-color: #353b48;
-    color: #dcdde1;
-    display: flex;
-    font-size: 20px;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    border-radius: 0%;
-}
-
-.team {
-    margin-left: 120px;
-    margin-top: 3px;
-}
-
-.links {
-	display: flex;
-	flex-direction: row;
-    padding-right: 40px;
-    margin-left: 400px;
-}
-
-.img {
-    margin-right: 80px;
-    font-size: 20px;
-}
-
-.fa {
-    color: #2bcbba;
 }

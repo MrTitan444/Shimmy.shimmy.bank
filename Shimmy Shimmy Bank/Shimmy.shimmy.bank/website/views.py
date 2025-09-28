@@ -55,6 +55,7 @@ def cc_btn():
 @views.route('/transhistsav')
 def transhistsav():
     l=get_t_sb(session['user'])
+    print(l)
     return render_template('transhistsav.html',lasvegas=l)
 
 @views.route('/carloan',methods=['GET'])

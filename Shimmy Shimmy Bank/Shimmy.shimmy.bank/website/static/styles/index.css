@@ -29,13 +29,6 @@
 
 }
 
-.flex {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: justify;
-}
-
 .summary {
     position:relative;
     display: flex;
@@ -48,8 +41,8 @@
     align-items: center;
     margin-bottom:-50px;
     margin: auto;
-    width: 2249px;
-    height: 950px;
+    width: calc(100vw + 370px);
+    height: 100vh;
 }
 
 

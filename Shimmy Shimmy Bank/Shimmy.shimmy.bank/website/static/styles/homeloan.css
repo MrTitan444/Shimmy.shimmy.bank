@@ -1,22 +1,3 @@
-/* Webkit */
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 /* Content */
 
 .btn {
@@ -32,7 +13,6 @@
   border: 5px solid #000000;
 
 }
-
 
 .card {
   top: -25px;
@@ -87,41 +67,4 @@ ul li label {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-}
-
-
-
-
-
-/* Footer */
-
-.jumbotron.footer {
-    background-color: #353b48;
-    color: #dcdde1;
-    display: flex;
-    font-size: 20px;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    border-radius: 0%;
-}
-
-.team {
-    margin-left: 120px;
-    margin-top: 3px;
-}
-
-.links {
-	display: flex;
-	flex-direction: row;
-    padding-right: 40px;
-    margin-left: 400px;
-}
-
-.img {
-    margin-right: 80px;
-    font-size: 20px;
-}
-
-.fa {
-    color: #2bcbba;
 }
