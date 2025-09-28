@@ -101,9 +101,10 @@ def s_transfer_btn():
     #transfer not wrokin
     t=sb_t(s_no,s_amt,session['user'])
     if t:
+        send_mail_d(get_reciever_id(s_no),s_amt)
         print('success')
         flash('Successfully Transfared','info')
-        send_mail_t(session['user'],s_amt)
+        send_mail_w(session['user'],s_amt)
     else:
         flash('Error','Error')
     return render_template('transfer.html')
