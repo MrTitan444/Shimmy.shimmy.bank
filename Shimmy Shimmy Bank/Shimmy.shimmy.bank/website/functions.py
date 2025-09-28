@@ -36,9 +36,11 @@ def s_sql():
 
 
 def c_sql():
+    global mycon
     mycon.close()
 
 def add_user_sql(user):
+    global mycon,cursor
     try:
         cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
         
@@ -47,6 +49,7 @@ def add_user_sql(user):
         return False
 
 def check_login(user):
+    global mycon,cursor
     try:
         cursor.execute('select cid, password from users where cid={}'.format(user['cid'],user['password']))
         data=cursor.fetchone()
@@ -60,9 +63,8 @@ def check_login(user):
         return False
     
 def add_sb(user):    
-    print('inside add_sb')
+    global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-    print('executed one cursor statemnt')
     cursor.execute(f'create table t_sb_{user["cid"]}(date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
     flash('Savings account succesfully created!!','info')
     return user
@@ -70,6 +72,7 @@ def add_sb(user):
 
 
 def add_c_loan(user):  
+    global mycon,cursor
     try:
         cursor.execute('insert into loans(cid, cl, c_amt, c_tp, c_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
         return user 
@@ -77,6 +80,7 @@ def add_c_loan(user):
         return False
     
 def add_h_loan(user): 
+    global mycon,cursor
     try:
         cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))      
         return user 
@@ -84,6 +88,7 @@ def add_h_loan(user):
         return False
 
 def get_info_login(user):
+    global mycon,cursor
     try:
         cursor.execute('select cid, email, sb from users where cid ={}'.format(user['cid']))
         data=list(cursor.fetchone())
@@ -95,6 +100,7 @@ def get_info_login(user):
     
     
 def get_t_sb(user):
+    global mycon,cursor
     ##try:
     mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
     cursor=mycon.cursor()
@@ -107,6 +113,7 @@ def get_t_sb(user):
        ## return []
 
 def add_ccn(cn,cid):
+    global mycon,cursor
     try:
         cursor.execute('insert into cc values({},{},{},{}) where cid={}'.format(cid,cn['ccn'],cn['cvv'],cn['valid'],cid))
         flash('Succesuflly generated credit card')
@@ -118,6 +125,7 @@ def add_ccn(cn,cid):
     
 
 def check_sb(user):
+    global mycon,cursor
     try:
         cursor.execute('select sb form users where cid="{}"'.format(user['cid']))
         d=int(cursor.fetchone())
@@ -128,6 +136,7 @@ def check_sb(user):
         return False
     
 def check_sb_t(user):
+    global mycon,cursor
     try:
         cursor.execute('select sb form users where cid="{}"'.format(user))
         d=int(cursor.fetchone())
@@ -140,6 +149,7 @@ def check_sb_t(user):
         return False
 
 def sb_t(reciever,amt,user):
+    global mycon,cursor
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
     a=a[0]
@@ -163,6 +173,7 @@ def sb_t(reciever,amt,user):
     return True
 
 def withdraw(user,amt):
+    global mycon,cursor
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
     a=a[0]
@@ -179,6 +190,7 @@ def withdraw(user,amt):
     return True
 
 def deposit(user,amt):
+    global mycon,cursor
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
