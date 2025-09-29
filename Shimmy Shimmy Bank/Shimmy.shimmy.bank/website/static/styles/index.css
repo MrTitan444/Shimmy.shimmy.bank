@@ -18,10 +18,21 @@
 }
 
 /* Content */
+.overlay {
+  position: absolute;
+  border-radius: 10px;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transition: 1s ease;
+}
 
 .text-block {
   position: absolute;
-  bottom: 450px;
+  bottom: 500px;
   right: 30px;
   background-color: transparent;
   text-align: left;
@@ -47,10 +58,22 @@
 
 
 /* Footer */
-
+.jumbotron {
+    position: absolute; 
+    background-color: #353b48;
+    
+    color: #dcdde1;
+    display: flex;
+    font-size: 20px;
+    margin-top: 50px;
+    width: 100vw;
+    margin-bottom: 0px;
+    border-radius: 0%;
+}
 .jumbotron.footer {
     background-color: #353b48;
     color: #dcdde1;
+    right:0px;
     display: flex;
     font-size: 20px;
     margin-top: 1px;
