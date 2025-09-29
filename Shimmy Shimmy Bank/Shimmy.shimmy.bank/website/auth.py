@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, url_for, redirect, flash, session
 from website.functions import *
 import mysql.connector as sqltor
+import time
 c=r=0
 l_user={};user={}
 mycon=sqltor.connect(host='localhost', user='root1', password='12345', database='shimmy_shimmy_bank')
@@ -18,9 +19,12 @@ def login_btn():
     if check_login(l_user):
         s=get_info_login(l_user)
         session['user']=s
+        session['user']['login']=True
+        flash('Succesfully logged in','l_success')
         return redirect(url_for('views.home'))
     else:
-        return redirect(url_for('views.home'))
+        flash('Invalid Credentials','l_error')
+        return redirect(url_for('views.login'))
 
 @auth.route('/update_btn',methods=['POST'])
 def update_btn():
@@ -63,6 +67,7 @@ def verify_btn():
         user['sb']=-1
         session['user']=user
         print(user)
+        session['user']['login']=True
         flash('You have been logged in','info')
         return redirect(url_for('views.home'))
     else:

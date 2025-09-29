@@ -199,6 +199,10 @@ def deposit(user,amt):
     q+=' values(curdate(),%s,1,%s,%s)'%(amt,a+amt,tid)
     cursor.execute(q)
     
+def get_reciever_id(bn_no):
+    global mycon, cursor
+    cursor.execute('select email from users where sb=%s'%(bn_no))
+    return cursor.fetchall()
     
 
 
@@ -266,7 +270,7 @@ This is a system generated email please do not reply'''
         server.starttls()
         server.login(email, a)
         server.sendmail(email, user['email'], text)
-        return user
+        return user 
     except:
         return False
     
@@ -309,7 +313,7 @@ This is a system generated email please do not reply'''
     except:
         return False
     
-def send_mail_t(user,amt):
+def send_mail_w(user,amt):
     email='shimmy.shimmy.bank@gmail.com'
     a='ofbi nazq fwmd ujmr'
     cid=user['cid']
@@ -325,5 +329,23 @@ This is a system generated email please do not reply'''
         server.login(email, a)
         server.sendmail(email, user['email'], text)
         return user
+    except:
+        return False
+    
+def send_mail_d(email1,amt):
+    email='shimmy.shimmy.bank@gmail.com'
+    a='ofbi nazq fwmd ujmr'
+    subject='Confirmation of transaction'
+    message=f'''Hello {email1}
+    A deposit of Rs{amt} has taken place.
+Regards Shimmy Shimmy Bank Team
+This is a system generated email please do not reply'''
+    text=f'Subject:{subject}\n{message}'
+    try:
+        server=smtplib.SMTP('smtp.gmail.com',587)
+        server.starttls()
+        server.login(email, a)
+        server.sendmail(email,email1,text)
+        return True
     except:
         return False
