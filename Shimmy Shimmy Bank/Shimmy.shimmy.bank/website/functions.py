@@ -39,6 +39,7 @@ def s_sql():
 def c_sql():
     global mycon
     mycon.close()
+    return mycon
 
 def add_user_sql(user):
     global mycon,cursor
