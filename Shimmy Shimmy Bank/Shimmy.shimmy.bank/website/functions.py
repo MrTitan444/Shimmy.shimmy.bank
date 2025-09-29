@@ -26,7 +26,8 @@ def chpwd(pwd):
 
 #sql fns
 
-mycon=cursor=None
+mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
+cursor=mycon.cursor()
 
 def s_sql():
     global mycon,cursor

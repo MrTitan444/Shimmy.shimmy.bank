@@ -4,8 +4,6 @@ import mysql.connector as sqltor
 import time
 c=r=0
 l_user={};user={}
-mycon=sqltor.connect(host='localhost', user='root1', password='12345', database='shimmy_shimmy_bank')
-cursor=mycon.cursor()
 auth=Blueprint('auth', __name__)
 
 @auth.route('/login',methods=['GET'])
