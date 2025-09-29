@@ -270,7 +270,7 @@ This is a system generated email please do not reply'''
         server.starttls()
         server.login(email, a)
         server.sendmail(email, user['email'], text)
-        return user
+        return user 
     except:
         return False
     
@@ -333,7 +333,6 @@ This is a system generated email please do not reply'''
         return False
     
 def send_mail_d(email1,amt):
-    #have to add reciever email
     email='shimmy.shimmy.bank@gmail.com'
     a='ofbi nazq fwmd ujmr'
     subject='Confirmation of transaction'

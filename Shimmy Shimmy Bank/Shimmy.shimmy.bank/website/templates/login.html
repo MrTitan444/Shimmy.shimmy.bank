@@ -30,13 +30,6 @@
               <label style="color: #4f5769;"><b>Password :</b></label>
               <input required name="l_password" class = "form-input" v-model="password" placeholder="Enter password" type="password">
             </div>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                {% for i in messages %} 
-                  <p> {{i}} </p>
-                {% endfor %}
-              {% endif %}
-            {% endwith %} 
               <div>
             <center><button value="submitForm" type="submit"  class="btn btn-info" @click="submitForm"><b><a style="color: #ffffff; text-decoration: none;">Submit</a></b></center>
             <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/" style="color: #ffffff; text-decoration: none;">Home</a></b></button></center>

@@ -19,6 +19,7 @@ def login_btn():
     if check_login(l_user):
         s=get_info_login(l_user)
         session['user']=s
+        session['user']['login']=True
         flash('Succesfully logged in','l_success')
         return redirect(url_for('views.home'))
     else:
@@ -66,6 +67,7 @@ def verify_btn():
         user['sb']=-1
         session['user']=user
         print(user)
+        session['user']['login']=True
         flash('You have been logged in','info')
         return redirect(url_for('views.home'))
     else:
