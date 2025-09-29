@@ -17,12 +17,14 @@
             <div class="profile flex">
             <img src="../static/images/indexeyes.png">
                 <div class="overlay">
-                  {% if session.user.login==%}
-                  <dialog open style="border: 2px solid rgb(121, 201, 201); border-radius: 12px; padding: 20px; background-color: rgb(223, 252, 190); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                    <form method="dialog">
-                      <button class="Close-button" aria-label="Close" style="background-color: rgb(121, 201, 201); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
-                    <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Welcome to Shimmy Shimmy Bank©, where your financial journey begins with a smile! We are dedicated to providing you with instant, safe, and reliable banking services that you can trust. Join us today and experience the joy of seamless banking!</b></p>
-                  </dialog>
+                  {% if session.get('login')==True %}
+                    <dialog open style="border: 2px solid rgb(121, 201, 201); border-radius: 12px; padding: 20px; background-color: rgb(223, 252, 190); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                      <form method="dialog">
+                        <button class="Close-button" aria-label="Close" style="background-color: rgb(121, 201, 201); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
+                      <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>You have succesfully logged in</b></p>
+                    </dialog>
+                    {% set dummy=session.pop('login') %}
+                  {% endif %}
                 <div class="text-block">
                   <h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>WELCOME TO SHIMMY SHIMMY BANK©.</b></h1>
                   <br><h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Your trusted financial partner</b></h1>

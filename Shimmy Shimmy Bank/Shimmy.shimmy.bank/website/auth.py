@@ -17,12 +17,12 @@ def login_btn():
     if check_login(l_user):
         s=get_info_login(l_user)
         session['user']=s
-        session['user']['login']=True
+        session['login']=True
         flash('Succesfully logged in','l_success')
         return redirect(url_for('views.home'))
     else:
-        flash('Invalid Credentials','l_error')
-        return redirect(url_for('views.login'))
+        session['l_fail']=True
+        return redirect(url_for('auth.login'))
 
 @auth.route('/update_btn',methods=['POST'])
 def update_btn():

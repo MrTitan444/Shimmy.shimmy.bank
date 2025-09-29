@@ -19,6 +19,15 @@
         <div class="card-body">
           <center><h3 class="h3class" style="font-family: 'Georgia'"><b>Log In</b></h3></center>
           <hr noshade>
+          {% if session.get('l_fail')==True %}
+            <br><br><br>
+            <dialog open style="border: 2px solid rgb(121, 201, 201); border-radius: 12px; padding: 20px; background-color: rgb(223, 252, 190); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog">
+                <button class="Close-button" aria-label="Close" style="background-color: rgb(223, 130, 130); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
+              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>Invalid Credentials</b></p>
+            </dialog>
+            {% set dummy=session.pop('l_fail') %}
+          {% endif %}
           <form class="form-body" id="form-body" method="post" action="{{ url_for('auth.login_btn') }}">
            
             <div class="form-group">
