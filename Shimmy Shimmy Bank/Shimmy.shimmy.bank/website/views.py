@@ -98,7 +98,6 @@ def s_transfer_btn():
     s_amt=int(request.form['s_transfer_amt'])
     s_no=request.form['s_no']
     # reciever amt user
-    #transfer not wrokin
     t=sb_t(s_no,s_amt,session['user'])
     if t:
         send_mail_d(get_reciever_id(s_no),s_amt)
@@ -127,5 +126,5 @@ def deposit():
 @views.route('/deposit_btn',methods=['POST'])
 def deposit_btn():
     amt=request.form['amt']
-    deposit(session['user'],amt)
+    deposit_(session['user'],amt)
     return render_template('deposit.html')

@@ -153,7 +153,10 @@ def check_sb_t(user):
 def sb_t(reciever,amt,user):
     global mycon,cursor
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
-    a=cursor.fetchall()[-1]
+    a=cursor.fetchall()
+    if not a:
+        print('no transactions')
+        return
     a=a[0]
     if amt>a:
         flash('Insuffecient funds','i_f')
@@ -191,7 +194,7 @@ def withdraw(user,amt):
     flash('Withdrawn successfully')
     return True
 
-def deposit(user,amt):
+def deposit_(user,amt):
     global mycon,cursor
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
