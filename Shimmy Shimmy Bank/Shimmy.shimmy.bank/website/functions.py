@@ -152,7 +152,7 @@ def check_sb_t(user):
 def sb_t(reciever,amt,user):
     global mycon,cursor
     cursor.execute('select sb from users')
-    if (int(reciever),) not in cursor.fetchall():
+    if (str(reciever),) not in cursor.fetchall():
         print('not found')
         session['t_user_not_found']=True
         return False

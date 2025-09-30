@@ -64,12 +64,10 @@ def verify_btn():
         send_mail_acc(user)
         user['sb']=-1
         session['user']=user
-        print(user)
-        session['user']['login']=True
-        flash('You have been logged in','info')
+        session['login']=True
         return redirect(url_for('views.home'))
     else:
-        flash('Wrong otp another otp has been sent to your email')
+        session['v_fail']=True
         return redirect(url_for('auth.verify'))
 
 @auth.route('/logout')
