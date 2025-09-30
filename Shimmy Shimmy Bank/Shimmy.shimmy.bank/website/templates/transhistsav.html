@@ -21,10 +21,11 @@
                     <thead>
                         <tr>
                             <th style="border: 2px solid black;">Date</th>
-                            <th style="border: 2px solid black;">To</th>
+                            <th style="border: 2px solid black;">Transaction ID</th>
                             <th style="border: 2px solid black;">Amount</th>
                             <th style="border: 2px solid black;">Particular</th>
                             <th style="border: 2px solid black;">Balance</th>
+                            <th style="border: 2px solid black;">To</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,7 @@
                             <td style="border: 2px solid black;">{{ i[4] }}</td>
                             <td style="border: 2px solid black;">{{ i[1] }}</td>
                             <td style="border: 2px solid black;">{{ i[2] }}</td>
+                            <td style="border: 2px solid black;">{{ i[3] }}</td>
                             <td style="border: 2px solid black;">{{ i[3] }}</td>
                         </tr>
                         {% endfor %}
