@@ -39,15 +39,14 @@
               <li><b>5 years:</b> 17% per annum</li>
               <li><b>10 years:</b> 20% per annum</li>
               <li><b>20 years:</b> 24% per annum</li>
-      
             </ul>
-            <center><div class="form-group">
-                  <label for="Amount" style="color: #4f5769;"><b>Enter Amount:</b></label>
-                  <input type="text" name="loan_amt" class="form-control" id="Amount" placeholder="Enter Amount" required>
-                </div></center>
-              <center><details><summary style="font-family: 'Courier New'"><b>Choose time period</b></summary>
-              <form method="post" action="{{ url_for('views.homeloan_btn') }}">
+              <center><details><summary style="font-family: 'Courier New'"><b>Enter amount and choose time period</b></summary>
+              <form>
               <fieldset>
+                  <center><div class="form-group">
+                  <label for="Amount" style="color: #4f5769;"><b>Enter Amount:</b></label>
+                  <input type="text" class="form-control" id="Amount" placeholder="Enter Amount" required>
+                  </div></center>
               <ul>
                 <li>
                   <label for="3months"><font style="font-family: 'Courier New'">3 months</font><input type="radio" id="3months" name="time_period" value="3months" /></label>

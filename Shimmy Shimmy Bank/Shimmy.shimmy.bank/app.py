@@ -6,4 +6,3 @@ app.secret_key='12345'
 
 if __name__ == '__main__':
     app.run(debug=True)
-

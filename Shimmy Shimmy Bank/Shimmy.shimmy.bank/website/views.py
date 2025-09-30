@@ -4,8 +4,6 @@ from random import randint
 from datetime import date
 views = Blueprint('views', __name__)
 
-
-
 @views.route('/')
 def home():
     return render_template('index.html')
@@ -24,11 +22,11 @@ def confirm_acc():
         send_mail_sb(session['user'])
     return redirect(url_for('views.ourservices'))
 
+
 @views.route('/transhistsav')
 def transhistsav():
     l=get_t_sb(session['user'])
     #date amount particular balance tid
-    print(l)
     return render_template('transhistsav.html',lasvegas=l)
 
 @views.route('/carloan',methods=['GET'])

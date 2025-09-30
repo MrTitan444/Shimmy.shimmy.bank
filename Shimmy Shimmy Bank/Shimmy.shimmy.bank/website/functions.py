@@ -226,20 +226,20 @@ def send_mail_ver(s_email):
     a='ofbi nazq fwmd ujmr'
     subject='Verification code for account creation at shimmy shimmy bank'
     message=f'''Hello {s_email}!!
- We have recieved a request to create an account at Shimmy Shimmy bank
+ We have recieved a request to create an account at Shimmy Shimmy bank.
  Here is the verification code: {otp}
- Regards
- Shimmy Shimmy Bank'''
+ Regards,
+ Shimmy Shimmy Bank.'''
     text=f'''Subject: {subject}
 
  {message}
-This is a system generated email please do not reply'''
+This is a system generated email. Please do not reply'''
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
         server.starttls()
         server.login(email, a)
         server.sendmail(email, s_email, text)
-        print('Email has been sent',otp)
+        print('Email has been sent.',otp)
         return otp
     except :
         return False
@@ -249,12 +249,13 @@ def send_mail_acc(user):
     email='shimmy.shimmy.bank@gmail.com'
     a='ofbi nazq fwmd ujmr'
     cid=user['cid']
-    subject='Confrimation of account creation'
+    subject='Confirmation of account creation'
     message=f'''Hello {user['email']}\nWe are happy to welcome you to Shimmy Shimmy Bank!!
-    This is your customer id: {cid}
-Please keep your customer id confidential as it will be used to login into our webpage
-Regards Shimmmy Shimmy Bank Team
-This is a system generated email please do not reply'''
+This is your customer id: {cid}
+Please keep your customer id confidential as it will be used to login into our webpage.
+Regards,
+Shimmy Shimmy Bank Team
+This is a system generated email. Please do not reply.'''
     text=f'Subject: {subject}\n{message}'
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
@@ -272,9 +273,10 @@ def send_mail_sb(user):
     user['sb_acc']=randint(10000,99999)
     subject='Creation of savings bank account'
     message=f'''Hello {user['email']}\nWe are happy to confirm your creation of your savings bank account under the customer id:{user['cid']}
-    The account number is : {user['sb']}
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
+The account number is : {user['sb']}
+Regards,
+Shimmy Shimmy Bank Team
+This is a system generated email. Please do not reply.'''
     text=f'Subject:{subject}\n{message}'
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
@@ -292,9 +294,10 @@ def send_mail_c_loan(user):
     cid=user['cid']
     subject='Confirmation of car loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Car loan under the customer id : {user['cid']}
-    The amount is : {user['loans']['amt']}
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
+The amount is : {user['loans']['amt']}
+Regards,
+Shimmy Shimmy Bank Team
+This is a system generated email. Please do not reply.'''
     text=f'Subject:{subject}\n{message}'
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
@@ -311,8 +314,9 @@ def send_mail_h_loan(user):
     cid=user['cid']
     subject='Confirmation of home loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Home loan under the customer id : {user['cid']}
-    The amount is : {user['loans']['amt']}
-Regards Shimmy Shimmy Bank Team
+The amount is : {user['loans']['amt']}
+Regards,
+Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
     text=f'Subject:{subject}\n{message}'
     try:
@@ -330,9 +334,10 @@ def send_mail_w(user,amt):
     cid=user['cid']
     subject='Confirmation of transaction'
     message=f'''Hello {user['email']}
-    A withdrawal of Rs{amt} has taken place.
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
+A withdrawal of Rs {amt} has taken place.
+Regards,
+Shimmy Shimmy Bank Team
+This is a system generated email. Please do not reply.'''
     text=f'Subject:{subject}\n{message}'
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
@@ -348,9 +353,10 @@ def send_mail_d(email1,amt):
     a='ofbi nazq fwmd ujmr'
     subject='Confirmation of transaction'
     message=f'''Hello {email1}
-    A deposit of Rs{amt} has taken place.
-Regards Shimmy Shimmy Bank Team
-This is a system generated email please do not reply'''
+A deposit of Rs {amt} has taken place.
+Regards,
+Shimmy Shimmy Bank Team
+This is a system generated email. Please do not reply.'''
     text=f'Subject:{subject}\n{message}'
     try:
         server=smtplib.SMTP('smtp.gmail.com',587)
