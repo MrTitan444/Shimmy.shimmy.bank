@@ -46,13 +46,13 @@
             {% set dummy=session.pop('t_user_not_found') %}
           {% endif %}
 
-          {% if session.get('insuffecient_funds')==True %}
+          {% if session.get('insufficient_funds')==True %}
             <dialog open style="top: 75px; left: -300px; border: 2px solid rgb(0, 0, 0); border-radius: 12px; padding: 20px; background-color: rgb(238, 94, 94); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
               <form method="dialog" open>
                 <button class="Close-button" aria-label="Close" style="background-color: rgb(164, 199, 150); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
-              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: rgb(0, 0, 0)"><b>Insuffecient funds</b></p>
+              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: rgb(0, 0, 0)"><b>Insufficient funds</b></p>
             </dialog>
-            {% set dummy=session.pop('insuffecient_funds') %}
+            {% set dummy=session.pop('insufficient_funds') %}
           {% endif %}
 
             <br>

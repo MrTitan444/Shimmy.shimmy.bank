@@ -67,7 +67,7 @@ def check_login(user):
 def add_sb(user):    
     global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
+    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, ToID char(4) default "Self")')
     flash('Savings account succesfully created!!','info')
     return user
     
@@ -165,7 +165,7 @@ def sb_t(reciever,amt,user):
         a=a[-1]
         a=a[0]
     if amt>a:
-        session['insuffecient_funds']=True
+        session['insufficient_funds']=True
         return False
     else:
         #table - date, amt, particular, balance,cid
@@ -185,7 +185,7 @@ def sb_t(reciever,amt,user):
         q=f'insert into t_sb_{x}'
         z=int(z[0])
         print(z) # ofjsdbfjsdbfjsdbf this stupid error converting tuple to int
-        q+=' values(sysdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
+        q+=' values(sysdate(),%s,1,%s,%s,%s)'%(amt,amt+z,tid,'Self')
         cursor.execute(q)
         session['s_transfer']=True
         return True
@@ -196,7 +196,7 @@ def withdraw_(user,amt):
     a=cursor.fetchall()[-1]
     a=int(a[0])
     if amt>a:
-        flash('Insuffecient funds','i_f')
+        flash('Insufficient funds','i_f')
         return False
     else:
         #table - date, amt, particular, balance,cid
