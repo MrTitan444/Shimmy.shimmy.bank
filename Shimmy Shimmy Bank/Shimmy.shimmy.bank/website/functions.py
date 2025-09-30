@@ -220,7 +220,7 @@ def deposit_(user,amt):
     # table - date , amt, particular, balance,tid,to_from
     q=f'insert into t_sb_{user['cid']}'
     q+=' values(sysdate(),%s,1,%s,%s,"Self")'%(amt,a+int(amt),tid)
-    session['deposit']=True
+    session['deposit_']=True
     cursor.execute(q)
     
 def get_reciever_id(bn_no):
