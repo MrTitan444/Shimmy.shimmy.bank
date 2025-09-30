@@ -18,7 +18,7 @@ def login_btn():
         s=get_info_login(l_user)
         session['user']=s
         session['login']=True
-        flash('Succesfully logged in','l_success')
+        flash('Succesfully logged in.','l_success')
         return redirect(url_for('views.home'))
     else:
         session['l_fail']=True
@@ -74,7 +74,7 @@ def verify_btn():
 def logout():
     c_sql()
     session.pop('user', None)
-    flash('You have been logged out','info')
+    flash('You have been logged out.','info')
     return redirect(url_for('views.home'))   
 
 @auth.route('/update')

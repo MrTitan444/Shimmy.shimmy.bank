@@ -56,10 +56,10 @@ def check_login(user):
         cursor.execute('select cid, password from users where cid={}'.format(user['cid'],user['password']))
         data=cursor.fetchone()
         if data==(user['cid'],user['password']):
-            flash('Succesfully logged in','info')
+            flash('Succesfully logged in.','info')
             return True
         else:
-            flash('Password or customer id is wrong','error')
+            flash('Password or customer id is wrong.','error')
             return False
     except:
         return False
@@ -120,7 +120,7 @@ def add_ccn(cn,cid):
     global mycon,cursor
     try:
         cursor.execute('insert into cc values({},{},{},{}) where cid={}'.format(cid,cn['ccn'],cn['cvv'],cn['valid'],cid))
-        flash('Succesuflly generated credit card')
+        flash('Succesuflly generated credit card.')
         return True
     except:
         return False    
@@ -144,7 +144,7 @@ def check_sb_t(user):
         if d:
             return user    
         else:
-            flash('Savings bank account not found','error')
+            flash('Savings bank account not found.','error')
             return False
     except:
         return False
@@ -326,8 +326,9 @@ def send_mail_h_loan(user):
     cid=user['cid']
     subject='Confirmation of home loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Home loan under the customer id : {user['cid']}
-    The amount is : {user['loans']['amt']}
-Regards Shimmy Shimmy Bank Team
+The amount is : {user['loans']['amt']}
+Regards,
+Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
     text=f'Subject:{subject}\n{message}'
     try:
