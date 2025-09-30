@@ -104,8 +104,6 @@ def s_transfer_btn():
     if t:
         send_mail_d(get_reciever_id(s_no),s_amt)
         send_mail_w(session['user'],s_amt)
-    else:
-        flash('Error','Error')
     return render_template('transfer.html')
 
 
@@ -116,7 +114,8 @@ def withdraw():
 @views.route('/withdraw_btn',methods=['POST'])
 def withdraw_btn():
     amt=int(request.form['amt'])
-    withdraw_(session['user'],amt)
+    if withdraw_(session['user'],amt):
+        send_mail_w(session['user'],amt)
     return render_template('withdraw.html')
 
 @views.route('/deposit',methods=['GET'])
@@ -127,4 +126,5 @@ def deposit():
 def deposit_btn():
     amt=request.form['amt']
     deposit_(session['user'],amt)
+    send_mail_d(session['user'],amt)
     return render_template('deposit.html')

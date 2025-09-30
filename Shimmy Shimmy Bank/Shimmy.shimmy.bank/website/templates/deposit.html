@@ -23,13 +23,13 @@
                 </div></center>
                 {% block submit %}<center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center>{% endblock %}
             </form>
-            {% if session.get('s_transfer')==True %}
+            {% if session.get('deposit_')==True %}
               <dialog open style="width: 95%; height: 90px; top: 300px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                 <form method="dialog" open>
                   <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
                   <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Deposit successful!!</b></p></center>
               </dialog>
-              {% set dummy=session.pop('s_transfer') %}
+              {% set dummy=session.pop('deposit_') %}
             {% endif %}
             <br>
           </div>

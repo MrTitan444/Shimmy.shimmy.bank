@@ -196,7 +196,7 @@ def withdraw_(user,amt):
     a=cursor.fetchall()[-1]
     a=int(a[0])
     if amt>a:
-        session['withdarw']=False
+        session['s_withdraw']=False
         return False
     else:
         #table - date, amt, particular, balance,cid, to
@@ -204,7 +204,7 @@ def withdraw_(user,amt):
         q=f'insert into t_sb_{user['cid']}'
         q+=' values(sysdate(),%s,2,%s,%s,"Self")'%(amt,a-amt,tid)
         cursor.execute(q)
-        session['withdraw']=True
+        session['s_withdraw']=True
         return True
 
 def deposit_(user,amt):
