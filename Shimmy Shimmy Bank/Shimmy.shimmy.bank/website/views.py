@@ -4,17 +4,6 @@ from random import randint
 from datetime import date
 views = Blueprint('views', __name__)
 
-
-
-
-
-# Still need to finish flashes 
-
-
-
-
-
-
 @views.route('/')
 def home():
     return render_template('index.html')
@@ -51,12 +40,10 @@ def cc_btn():
     add_ccn(cn,session['user']['cid'])
     return redirect(url_for('views.ourservices'))
 
-
 @views.route('/transhistsav')
 def transhistsav():
     l=get_t_sb(session['user'])
     #date amount particular balance tid
-    print(l)
     return render_template('transhistsav.html',lasvegas=l)
 
 @views.route('/carloan',methods=['GET'])
