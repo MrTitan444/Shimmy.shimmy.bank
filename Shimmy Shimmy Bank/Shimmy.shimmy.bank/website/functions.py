@@ -196,7 +196,7 @@ def withdraw_(user,amt):
     a=cursor.fetchall()[-1]
     a=int(a[0])
     if amt>a:
-        flash('Insufficient funds','i_f')
+        session['withdarw']=False
         return False
     else:
         #table - date, amt, particular, balance,cid, to
@@ -204,8 +204,8 @@ def withdraw_(user,amt):
         q=f'insert into t_sb_{user['cid']}'
         q+=' values(sysdate(),%s,2,%s,%s,"Self")'%(amt,a-amt,tid)
         cursor.execute(q)
-    flash('Withdrawn successfully')
-    return True
+        session['withdraw']=True
+        return True
 
 def deposit_(user,amt):
     global mycon,cursor
@@ -220,7 +220,7 @@ def deposit_(user,amt):
     # table - date , amt, particular, balance,tid,to_from
     q=f'insert into t_sb_{user['cid']}'
     q+=' values(sysdate(),%s,1,%s,%s,"Self")'%(amt,a+int(amt),tid)
-    print(q)
+    session['deposit']=True
     cursor.execute(q)
     
 def get_reciever_id(bn_no):

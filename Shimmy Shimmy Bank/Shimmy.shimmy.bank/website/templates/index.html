@@ -20,7 +20,7 @@
                     <dialog open style="border: 2px solid rgb(121, 201, 201); border-radius: 12px; padding: 20px; background-color: rgb(223, 252, 190); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
                       <form method="dialog">
                         <button class="Close-button" aria-label="Close" style="background-color: rgb(121, 201, 201); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
-                      <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>You have successfully logged in. Welcome to Shimmy Shimmy Bank©, {{ session.get('user["cid"]',"goodmorning") }}. This bank is your one stop solution for all your financial needs.</b></p>
+                      <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><b>You have successfully logged in. Welcome to Shimmy Shimmy Bank©, {{ session.user.cid }}. This bank is your one stop solution for all your financial needs.</b></p>
                     </dialog>
                     {% set dummy=session.pop('login') %}
                   {% endif %}
