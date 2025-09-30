@@ -84,7 +84,9 @@ def add_c_loan(user):
 def add_h_loan(user): 
     global mycon,cursor
     try:
-        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))      
+        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest,h_s_date,h_c_date) values("%s","yes",%s,%s,sysdate(),sysdate()+%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],user['loans']['tp']))      
+        cursor.execute(f'insert into t_sb_{user['cid']} values()')
+        session['h_loan']=True
         return user 
     except:
         return False
