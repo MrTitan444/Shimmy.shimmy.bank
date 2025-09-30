@@ -28,6 +28,7 @@
   <div class="card">
     <div class="card-body">
           <div>
+            {{ session }}
             {% if session.user.sb==-1 %}
               <h1 style="font-family: 'Courier New'"><center><b>OPEN AN ACCOUNT</b></center></h1>
               <center><details><summary style="font-family: 'Courier New'"><b>Choose Account Type</b></summary>
@@ -47,7 +48,7 @@
           </div>
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>APPLY FOR A CREDIT CARD</b></center></h1>
-            {% if session.user.sb!=-1 %}
+            {% if session['user'].get('cc',False)==False %}
               <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="{{ url_for('views.cc') }}">Apply Now</a></b></button></center><br><br>
             {% else %}
               <p>Please create a savings bank account to create a credit card number</p>

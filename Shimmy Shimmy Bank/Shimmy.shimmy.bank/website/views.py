@@ -6,15 +6,6 @@ views = Blueprint('views', __name__)
 
 
 
-
-
-# Still need to finish flashes 
-
-
-
-
-
-
 @views.route('/')
 def home():
     return render_template('index.html')
@@ -32,25 +23,6 @@ def confirm_acc():
         add_sb(session['user'])
         send_mail_sb(session['user'])
     return redirect(url_for('views.ourservices'))
-
-@views.route('/cc',methods=['GET'])
-def cc():
-    return render_template('cc.html')
-
-@views.route('/cc_btn',methods=['POST'])
-def cc_btn():
-    ccn1=''
-    cvv1=str(randint(100,999))
-    t=date.today()
-    v=str(t.year + 10)+'-'+str(t.month)+'-'+str(t.day)
-    for i in range(4):
-        ccn+=str(randint(1000,9999))
-        if i!=3:
-             ccn+=' '
-    cn=dict(ccn=ccn1,valid=v,cvv=cvv1)
-    add_ccn(cn,session['user']['cid'])
-    return redirect(url_for('views.ourservices'))
-
 
 @views.route('/transhistsav')
 def transhistsav():

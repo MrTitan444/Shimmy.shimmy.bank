@@ -1,7 +1,7 @@
 #this file contains all functions
 import smtplib
 from random import randint
-from flask import request, flash, session
+from flask import request, session
 import mysql.connector as sqltor
 
 #general fns
@@ -56,10 +56,8 @@ def check_login(user):
         cursor.execute('select cid, password from users where cid={}'.format(user['cid'],user['password']))
         data=cursor.fetchone()
         if data==(user['cid'],user['password']):
-            flash('Succesfully logged in','info')
             return True
         else:
-            flash('Password or customer id is wrong','error')
             return False
     except:
         return False
@@ -68,7 +66,6 @@ def add_sb(user):
     global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
     cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self")')
-    flash('Savings account succesfully created!!','info')
     return user
     
 
@@ -116,18 +113,7 @@ def get_t_sb(user):
     ##except:
        ## return []
 
-def add_ccn(cn,cid):
-    global mycon,cursor
-    try:
-        cursor.execute('insert into cc values({},{},{},{}) where cid={}'.format(cid,cn['ccn'],cn['cvv'],cn['valid'],cid))
-        flash('Succesuflly generated credit card')
-        return True
-    except:
-        return False    
-
-
     
-
 def check_sb(user):
     global mycon,cursor
     try:
@@ -147,7 +133,6 @@ def check_sb_t(user):
         if d:
             return user    
         else:
-            flash('Savings bank account not found','error')
             return False
     except:
         return False

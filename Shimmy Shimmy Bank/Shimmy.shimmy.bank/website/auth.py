@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, url_for, redirect, flash, session
+from flask import Blueprint, render_template, jsonify, request, url_for, redirect, session
 from website.functions import *
 import mysql.connector as sqltor
 import time
@@ -18,7 +18,6 @@ def login_btn():
         s=get_info_login(l_user)
         session['user']=s
         session['login']=True
-        flash('Succesfully logged in','l_success')
         return redirect(url_for('views.home'))
     else:
         session['l_fail']=True
@@ -74,7 +73,6 @@ def verify_btn():
 def logout():
     c_sql()
     session.pop('user', None)
-    flash('You have been logged out','info')
     return redirect(url_for('views.home'))   
 
 @auth.route('/update')
