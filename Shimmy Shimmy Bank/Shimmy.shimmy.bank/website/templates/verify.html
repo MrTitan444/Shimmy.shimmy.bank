@@ -20,19 +20,20 @@
           <center><h3 class="h3class" style="font-family: 'Georgia'"><b>Enter Verification Code</b></h3></center>
           <hr noshade>
           <form class="form-body" id="form-body" method="post" action="{{ url_for('auth.verify_btn') }}">
-            {% with messages=get_flashed_messages() %}
-              {% if messages %}
-                {% for i in messages %}
-                  <p><span>{{i}}</span></p>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
             <div class="form-group">
               <label style="color: #4f5769;"><b>Enter OTP :</b></label>
               <input type="number" required class = "form-input" v-model="otp" placeholder="Enter OTP" name="otp">
             </div>
             <div>
             <center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="color: #ffffff; text-decoration: none;">Submit</a></b></center>
+            {% if session.get('v_fail')==True %}
+            <dialog open style="width: 95%; height: 90px; top: 343px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(243, 95, 95); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+                <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Wrong verification Code, please enter the correct code.</b></p></center>
+            </dialog>
+            {% set dummy=session.pop('v_fail') %}
+          {% endif %}
             </div>
           </form>
         </div>
