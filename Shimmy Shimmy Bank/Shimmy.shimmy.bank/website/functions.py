@@ -44,7 +44,7 @@ def c_sql():
 def add_user_sql(user):
     global mycon,cursor
     try:
-        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
+        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,'-1')", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
         
         return user
     except:
@@ -67,7 +67,7 @@ def check_login(user):
 def add_sb(user):    
     global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, ToID char(4) default "Self")')
+    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(4) default "Self")')
     flash('Savings account succesfully created!!','info')
     return user
     
@@ -160,7 +160,7 @@ def sb_t(reciever,amt,user):
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()
     if not a:
-        a-0
+        a=0
     else:
         a=a[-1]
         a=a[0]
@@ -170,22 +170,22 @@ def sb_t(reciever,amt,user):
     else:
         #table - date, amt, particular, balance,cid
         tid=randint(1000,9999)
-        int(reciever)
-        q=f'insert into t_sb_{user['cid']}'
-        q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
-        cursor.execute(q)
         cursor.execute('select cid from users where sb=%s'%(reciever))
         x=cursor.fetchone() # reciver cid
         x=''.join(x)
+        q=f'insert into t_sb_{user['cid']}'
+        q+=' values(sysdate(),%s,2,%s,%s,"%s")'%(amt,a-amt,tid,reciever)
+        cursor.execute(q)
         cursor.execute(f'select balance from t_sb_{x}')
         z=cursor.fetchall()
         if not z:
             z=0
         z=z[-1]
-        q=f'insert into t_sb_{x}'
         z=int(z[0])
-        print(z) # ofjsdbfjsdbfjsdbf this stupid error converting tuple to int
-        q+=' values(sysdate(),%s,1,%s,%s,%s)'%(amt,amt+z,tid,'Self')
+        cursor.execute('select sb from users where cid="%s"'%(user['cid']))
+        e=cursor.fetchall()[-1][0]
+        q=f'insert into t_sb_{x}'
+        q+=' values(sysdate(),%s,1,%s,%s,%s)'%(amt,amt+z,tid,e)
         cursor.execute(q)
         session['s_transfer']=True
         return True
@@ -199,7 +199,7 @@ def withdraw_(user,amt):
         flash('Insufficient funds','i_f')
         return False
     else:
-        #table - date, amt, particular, balance,cid
+        #table - date, amt, particular, balance,cid, to
         tid=randint(1000,9999)
         q=f'insert into t_sb_{user['cid']}'
         q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
@@ -211,10 +211,15 @@ def deposit_(user,amt):
     global mycon,cursor
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
-    a=cursor.fetchall()[-1]
-    a=int(a[0])
+    a=cursor.fetchall()
+    if not a:
+        a=0
+    else:
+        a=a[-1]
+        a=int(a[0])
+    # table - date , amt, particular, balance,tid,to_from
     q=f'insert into t_sb_{user['cid']}'
-    q+=' values(sysdate(),%s,1,%s,%s)'%(amt,a+int(amt),tid)
+    q+=' values(sysdate(),%s,1,%s,%s,"Self")'%(amt,a+int(amt),tid)
     cursor.execute(q)
     
 def get_reciever_id(bn_no):
