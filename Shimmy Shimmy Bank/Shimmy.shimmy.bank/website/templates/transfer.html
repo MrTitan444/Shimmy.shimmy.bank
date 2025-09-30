@@ -16,10 +16,11 @@
     <div class="card-body">
           <div>
             <h1 style="font-family: 'Courier New'"><center><b>{% block trans %}TRANSFER FROM SAVINGS ACCOUNT{% endblock %}</b></center></h1>
+            <p>Maximum amount : 150000000</p>
             <form method="post" action="{{ url_for('views.s_transfer_btn') }}">
                 <center><div class="form-group">
                   <label for="amount" style="color: #4f5769;"><b>{% block amount %}Enter amount:{% endblock %}</b></label>
-                  <input type="text" class="form-control" id="amount" placeholder="Enter amount" required name="s_transfer_amt">
+                  <input type="number" max="150000000" min="0" class="form-control" id="amount" placeholder="Enter amount" required name="s_transfer_amt">
                 </div></center>
                 <center><div class="form-group">
                   <label for="recipientAccount" style="color: #4f5769;"><b>{% block recep %}Enter recipient's bank savings bank account number :{% endblock %}</b></label>
