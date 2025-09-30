@@ -155,6 +155,7 @@ def sb_t(reciever,amt,user):
     cursor.execute('select sb from users')
     if (int(reciever),) not in cursor.fetchall():
         print('not found')
+        session['t_user_not_found']=True
         return False
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()
@@ -164,8 +165,7 @@ def sb_t(reciever,amt,user):
         a=a[-1]
         a=a[0]
     if amt>a:
-        print('insuffecient funds')
-        flash('Insuffecient funds','i_f')
+        session['insuffecient_funds']=True
         return False
     else:
         #table - date, amt, particular, balance,cid
@@ -174,14 +174,20 @@ def sb_t(reciever,amt,user):
         q=f'insert into t_sb_{user['cid']}'
         q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
         cursor.execute(q)
-        cursor.execute(f'select balance from t_sb_{reciever}')
-        z=cursor.fetchone()
+        cursor.execute('select cid from users where sb=%s'%(reciever))
+        x=cursor.fetchone() # reciver cid
+        x=''.join(x)
+        cursor.execute(f'select balance from t_sb_{x}')
+        z=cursor.fetchall()
         if not z:
             z=0
-        q=f'insert into t_sb_{reciever}'
+        z=z[-1]
+        q=f'insert into t_sb_{x}'
+        z=int(z[0])
+        print(z) # ofjsdbfjsdbfjsdbf this stupid error converting tuple to int
         q+=' values(sysdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
         cursor.execute(q)
-        flash('Transfered successfully')
+        session['s_transfer']=True
         return True
 
 def withdraw_(user,amt):

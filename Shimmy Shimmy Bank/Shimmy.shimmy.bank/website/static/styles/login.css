@@ -43,10 +43,11 @@ body {
   justify-content: space-around;
   align-items: center;
   border-radius: 20px;
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
+} 
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .sub-form {

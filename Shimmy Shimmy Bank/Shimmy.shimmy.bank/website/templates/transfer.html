@@ -27,6 +27,34 @@
                 </div></center> 
                 {% block submit %}<center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center><br><br>{% endblock %}
             </form>
+
+          {% if session.get('s_transfer')==True %}
+            <dialog open style="top: 75px; left: -300px; border: 2px solid rgb(0, 0, 0); border-radius: 12px; padding: 20px; background-color: rgb(110, 235, 126); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <button class="Close-button" aria-label="Close" style="background-color: rgb(164, 199, 150); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
+              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: rgb(0, 0, 0)"><b>Transfer successful!!</b></p>
+            </dialog>
+            {% set dummy=session.pop('s_transfer') %}
+          {% endif %}  
+
+          {% if session.get('t_user_not_found')==True %}
+            <dialog open style="top: 75px; left: -300px; border: 2px solid rgb(0, 0, 0); border-radius: 12px; padding: 20px; background-color: rgb(238, 94, 94); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <button class="Close-button" aria-label="Close" style="background-color: rgb(164, 199, 150); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
+              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: rgb(0, 0, 0)"><b>The recipient does not exist</b></p>
+            </dialog>
+            {% set dummy=session.pop('t_user_not_found') %}
+          {% endif %}
+
+          {% if session.get('insuffecient_funds')==True %}
+            <dialog open style="top: 75px; left: -300px; border: 2px solid rgb(0, 0, 0); border-radius: 12px; padding: 20px; background-color: rgb(238, 94, 94); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <button class="Close-button" aria-label="Close" style="background-color: rgb(164, 199, 150); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button>
+              <p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;color: rgb(0, 0, 0)"><b>Insuffecient funds</b></p>
+            </dialog>
+            {% set dummy=session.pop('insuffecient_funds') %}
+          {% endif %}
+
             <br>
           </div>
           </div>
