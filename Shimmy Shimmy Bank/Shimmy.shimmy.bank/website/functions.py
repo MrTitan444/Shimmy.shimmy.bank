@@ -44,7 +44,7 @@ def c_sql():
 def add_user_sql(user):
     global mycon,cursor
     try:
-        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,-1)", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
+        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,'-1')", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
         
         return user
     except:
@@ -160,7 +160,7 @@ def sb_t(reciever,amt,user):
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()
     if not a:
-        a-0
+        a=0
     else:
         a=a[-1]
         a=a[0]
@@ -170,12 +170,11 @@ def sb_t(reciever,amt,user):
     else:
         #table - date, amt, particular, balance,cid
         tid=randint(1000,9999)
-        int(reciever)
         cursor.execute('select cid from users where sb=%s'%(reciever))
         x=cursor.fetchone() # reciver cid
         x=''.join(x)
         q=f'insert into t_sb_{user['cid']}'
-        q+=' values(sysdate(),%s,2,%s,%s,%s)'%(amt,a-amt,tid,x)
+        q+=' values(sysdate(),%s,2,%s,%s,"%s")'%(amt,a-amt,tid,reciever)
         cursor.execute(q)
         cursor.execute(f'select balance from t_sb_{x}')
         z=cursor.fetchall()
@@ -212,10 +211,15 @@ def deposit_(user,amt):
     global mycon,cursor
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
-    a=cursor.fetchall()[-1]
-    a=int(a[0])
+    a=cursor.fetchall()
+    if not a:
+        a=0
+    else:
+        a=a[-1]
+        a=int(a[0])
+    # table - date , amt, particular, balance,tid,to_from
     q=f'insert into t_sb_{user['cid']}'
-    q+=' values(sysdate(),%s,1,%s,%s)'%(amt,a+int(amt),tid)
+    q+=' values(sysdate(),%s,1,%s,%s,"Self")'%(amt,a+int(amt),tid)
     cursor.execute(q)
     
 def get_reciever_id(bn_no):
