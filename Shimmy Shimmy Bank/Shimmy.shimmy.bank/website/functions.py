@@ -67,7 +67,7 @@ def check_login(user):
 def add_sb(user):    
     global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(4) default "Self")')
+    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self")')
     flash('Savings account succesfully created!!','info')
     return user
     
@@ -109,7 +109,7 @@ def get_t_sb(user):
     print("enter")
     print(user['cid'])
     cursor.execute('select * from t_sb_{}'.format(user['cid']))
-    data=cursor.fetchall()
+    data=cursor.fetchall()[::-1]
     return data
     ##except:
        ## return []
@@ -202,7 +202,7 @@ def withdraw_(user,amt):
         #table - date, amt, particular, balance,cid, to
         tid=randint(1000,9999)
         q=f'insert into t_sb_{user['cid']}'
-        q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
+        q+=' values(sysdate(),%s,2,%s,%s,"Self")'%(amt,a-amt,tid)
         cursor.execute(q)
     flash('Withdrawn successfully')
     return True
@@ -220,6 +220,7 @@ def deposit_(user,amt):
     # table - date , amt, particular, balance,tid,to_from
     q=f'insert into t_sb_{user['cid']}'
     q+=' values(sysdate(),%s,1,%s,%s,"Self")'%(amt,a+int(amt),tid)
+    print(q)
     cursor.execute(q)
     
 def get_reciever_id(bn_no):
