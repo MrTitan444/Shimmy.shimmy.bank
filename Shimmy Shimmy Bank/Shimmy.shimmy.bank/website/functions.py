@@ -67,7 +67,7 @@ def check_login(user):
 def add_sb(user):    
     global mycon,cursor
     cursor.execute('update users set sb=%s where cid="%s"'%(user['sb'],user['cid']))
-    cursor.execute(f'create table t_sb_{user["cid"]}(date date,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
+    cursor.execute(f'create table t_sb_{user["cid"]}(date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int)')
     flash('Savings account succesfully created!!','info')
     return user
     
@@ -152,36 +152,43 @@ def check_sb_t(user):
 
 def sb_t(reciever,amt,user):
     global mycon,cursor
+    cursor.execute('select sb from users')
+    if (int(reciever),) not in cursor.fetchall():
+        print('not found')
+        return False
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()
     if not a:
-        print('no transactions')
-        return
-    a=a[0]
+        a-0
+    else:
+        a=a[-1]
+        a=a[0]
     if amt>a:
+        print('insuffecient funds')
         flash('Insuffecient funds','i_f')
         return False
     else:
         #table - date, amt, particular, balance,cid
         tid=randint(1000,9999)
+        int(reciever)
         q=f'insert into t_sb_{user['cid']}'
-        q+=' values(curdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
+        q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
         cursor.execute(q)
         cursor.execute(f'select balance from t_sb_{reciever}')
         z=cursor.fetchone()
         if not z:
             z=0
         q=f'insert into t_sb_{reciever}'
-        q+=' values(curdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
+        q+=' values(sysdate(),%s,1,%s,%s)'%(amt,amt+z,tid)
         cursor.execute(q)
-    flash('Transfered successfully')
-    return True
+        flash('Transfered successfully')
+        return True
 
-def withdraw(user,amt):
+def withdraw_(user,amt):
     global mycon,cursor
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
-    a=a[0]
+    a=int(a[0])
     if amt>a:
         flash('Insuffecient funds','i_f')
         return False
@@ -189,7 +196,7 @@ def withdraw(user,amt):
         #table - date, amt, particular, balance,cid
         tid=randint(1000,9999)
         q=f'insert into t_sb_{user['cid']}'
-        q+=' values(curdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
+        q+=' values(sysdate(),%s,2,%s,%s)'%(amt,a-amt,tid)
         cursor.execute(q)
     flash('Withdrawn successfully')
     return True
@@ -199,9 +206,9 @@ def deposit_(user,amt):
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()[-1]
-    a=a[0]
+    a=int(a[0])
     q=f'insert into t_sb_{user['cid']}'
-    q+=' values(curdate(),%s,1,%s,%s)'%(amt,a+amt,tid)
+    q+=' values(sysdate(),%s,1,%s,%s)'%(amt,a+int(amt),tid)
     cursor.execute(q)
     
 def get_reciever_id(bn_no):

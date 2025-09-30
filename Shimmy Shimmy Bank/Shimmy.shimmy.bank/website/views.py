@@ -97,6 +97,7 @@ def transfer():
 def s_transfer_btn():
     s_amt=int(request.form['s_transfer_amt'])
     s_no=request.form['s_no']
+    print(s_no)
     # reciever amt user
     t=sb_t(s_no,s_amt,session['user'])
     if t:
@@ -115,8 +116,8 @@ def withdraw():
 
 @views.route('/withdraw_btn',methods=['POST'])
 def withdraw_btn():
-    amt=request.form['amt']
-    withdraw(session['user'],amt)
+    amt=int(request.form['amt'])
+    withdraw_(session['user'],amt)
     return render_template('withdraw.html')
 
 @views.route('/deposit',methods=['GET'])
