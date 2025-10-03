@@ -221,8 +221,11 @@ def h_loan_transfer(user):
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user['cid']} where date=(select max(date) from t_sb_{user['cid']})')
     d=cursor.fetchall()
-    amt=d[0][0]                     #date, amt, particular,balance, tid, to/from
-    cursor.execute(f'insert into t_sb_{user["cid"]} values(sysdate(),%s,1,%s,%s,"Loan")'%(amt,user['h_loan']['amt']+amt,tid))
+    amt=d[0][0]
+    print('balance:',amt,'loanamt:',user['h_loan']['amt'])                     #date, amt, particular,balance, tid, to/from
+    q=f'insert into t_sb_{user["cid"]} values(sysdate(),%s,1,%s,%s,"Loan")'
+    r=(user['h_loan']['amt'],user['h_loan']['amt']+amt,tid)
+    cursor.execute(q,r)
     return user
 
 def c_loan_transfer(user):
@@ -230,7 +233,7 @@ def c_loan_transfer(user):
     cursor.execute(f'select balance from t_sb_{user['cid']} where date=(select max(date) from t_sb_{user['cid']})')
     d=cursor.fetchall()
     amt=d[0][0]                     #date, amt, particular,balance, tid, to/from
-    cursor.execute(f'insert into t_sb_{user["cid"]} values(sysdate(),%s,1,%s,%s,"Loan")'%(amt,user['c_loan']['amt']+amt,tid))
+    cursor.execute(f'insert into t_sb_{user["cid"]} values(sysdate(),%s,1,%s,%s,"Loan")'%(user['c_loan']['amt'],user['c_loan']['amt']+amt,tid))
     return user    
 
 #smtp fns
