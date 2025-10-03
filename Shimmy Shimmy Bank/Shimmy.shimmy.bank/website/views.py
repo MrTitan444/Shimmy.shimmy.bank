@@ -40,7 +40,7 @@ def carloan_btn():
     form_tp=int(request.form.get('time_period'))
     tp=date.today()+relativedelta(months=form_tp)
     c_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
-    session['user']['loans']=c_loan_details
+    session['user']['c_loan']=c_loan_details
     add_c_loan(session['user'],tp)
     send_mail_c_loan(session['user'])
 
@@ -104,12 +104,12 @@ def deposit_btn():
 def hl_t_btn():
     h_loan_transfer(session['user'])
     session['h_loan_transfer']=True
-    send_mail_d(session['user'],session['user']['h_loans']['amt'])
+    send_mail_d(session['user'],session['user']['h_loan']['amt'])
     return render_template('homeloan.html')
 
 @views.route('cl_t_btn',methods=['POST'])
 def cl_t_btn():
     c_loan_transfer(session['user'])
     session['c_loan_transfer']=True
-    send_mail_d(session['user'],session['user']['h_loans']['amt'])
+    send_mail_d(session['user'],session['user']['c_loan']['amt'])
     return render_template('carloan.html')
