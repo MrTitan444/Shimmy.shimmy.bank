@@ -79,8 +79,24 @@
               <form method="dialog" open>
                 <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
                 <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Home loan successful</b></p></center>
+              </form>
+              {% if session.user['sb']!=-1 %}
+                <form method="post" action="{{ url_for('views.hl_t_btn') }}">
+                  <button type="submit">Transfer loan amount to savings bank account</button>
+                </form>
+              {% endif %}
             </dialog>
             {% set dummy=session.pop('h_loan') %}
+          {% endif %}
+
+          {% if session.get('h_loan_transfer',False)==True %}
+            <dialog open style="width: 95%; height: 90px; top: 343px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+                <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Transfer successful!!</b></p></center>
+            </dialog>
+            {% set dummy=session.pop('h_loan_transfer') %}
+          {% endif %}
         </details></center><br><br>
           </div>
           </div>

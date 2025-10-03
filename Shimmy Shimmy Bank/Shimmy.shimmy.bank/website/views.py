@@ -56,10 +56,10 @@ def homeloan_btn():
     form_tp=int(request.form.get('time_period'))
     tp=date.today()+relativedelta(months=form_tp)
     h_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
-    session['user']['loans']=h_loan_details
+    session['user']['h_loan']=h_loan_details
     add_h_loan(session['user'],tp)
     send_mail_h_loan(session['user'])
-    return redirect(url_for('views.ourservices'))
+    return redirect(url_for('views.homeloan'))
 
 @views.route('/transfer',methods=['GET'])
 def transfer():
@@ -99,3 +99,9 @@ def deposit_btn():
     deposit_(session['user'],amt)
     send_mail_d(session['user'],amt)
     return render_template('deposit.html')
+
+@views.route('hl_t_btn',methods=['POST'])
+def hl_t_btn():
+    h_loan_transfer(session['user'])
+    session['h_loan_transfer']=True
+    return render_template('homeloan.html')
