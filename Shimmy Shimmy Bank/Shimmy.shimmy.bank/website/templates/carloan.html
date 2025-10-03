@@ -40,7 +40,7 @@
               <li><b>240 months (20 years):</b> 24% per annum</li>
             </ul>
               <center><details><summary style="font-family: 'Courier New'"><b>Enter amount and choose time period</b></summary>
-              <form>
+              <form method="post" action="{{ url_for('views.carloan_btn') }}">
               <fieldset>
                   <center><div class="form-group">
                   <label for="Amount" style="color: #4f5769;"><b>Enter Amount:</b></label>
@@ -74,6 +74,14 @@
             </fieldset>
             
          </form>
+         {% if session.get('c_loan')==True %}
+            <dialog open style="width: 95%; height: 90px; top: 343px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+                <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Car loan successful</b></p></center>
+            </dialog>
+            {% set dummy=session.pop('c_loan') %}
+          {% endif %}
         </details></center><br><br>
           </div>
           </div>
