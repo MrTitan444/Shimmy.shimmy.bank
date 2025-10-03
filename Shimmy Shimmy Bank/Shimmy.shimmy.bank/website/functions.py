@@ -3,6 +3,8 @@ import smtplib
 from random import randint
 from flask import request, session
 import mysql.connector as sqltor
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 #general fns
 
@@ -70,23 +72,22 @@ def add_sb(user):
     
 
 
-def add_c_loan(user):  
+def add_c_loan(user,tp):  
     global mycon,cursor
-    try:
-        cursor.execute('insert into loans(cid, cl, c_amt, c_tp, c_interest) values("%s","yes",%s,%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest']))
-        return user 
-    except:
-        return False
+    r=(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],tp)
+    q='insert into c_loans values("%s","yes",%s,%s,%s,curdate(),%s)'
+    cursor.execute(q,r)      
+    session['c_loan']=True
+    return user 
     
-def add_h_loan(user): 
-    global mycon,cursor
-    try:
-        cursor.execute('insert into loans(cid, hl, h_amt, h_tp, h_interest,h_s_date,h_c_date) values("%s","yes",%s,%s,sysdate(),sysdate()+%s)'%(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],user['loans']['tp']))      
-        cursor.execute(f'insert into t_sb_{user['cid']} values()')
-        session['h_loan']=True
-        return user 
-    except:
-        return False
+def add_h_loan(user,tp): 
+    global mycon,cursor   
+    #cid, hl, h_amt, h_tp, interest, start date, close date                                                                                                
+    r=(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],tp)
+    q='insert into h_loans values("%s","yes",%s,%s,%s,curdate(),%s)'
+    cursor.execute(q,r)      
+    session['h_loan']=True
+    return user 
 
 def get_info_login(user):
     global mycon,cursor

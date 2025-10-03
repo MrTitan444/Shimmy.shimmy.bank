@@ -36,13 +36,13 @@ def carloan():
 @views.route('carloan_btn',methods=['POST'])
 def carloan_btn():
     interest={3:5,6:5.5,12:12,24:14,60:17,120:20,240:24}
-    amt=int(request.form('loan_amt'))
-    tp=request.form.getlist('time_period')
-    c_loan_details={'amt':amt,'tp':tp,'interest':interest[tp]}
+    amt=int(request.form['loan_amt'])
+    form_tp=int(request.form.get('time_period'))
+    tp=date.today()+relativedelta(months=form_tp)
+    c_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
     session['user']['loans']=c_loan_details
-    add_c_loan(session['user'])
+    add_c_loan(session['user'],tp)
     send_mail_c_loan(session['user'])
-    return redirect(url_for('views.ourservices'))
 
 
 @views.route('/homeloan',methods=['GET'])
@@ -53,10 +53,11 @@ def homeloan():
 def homeloan_btn():
     interest={3:5,6:5.5,12:12,24:14,60:17,120:20,240:24}
     amt=int(request.form['loan_amt'])
-    tp=request.form.getlist['time_period']
-    h_loan_details={'amt':amt,'tp':tp,'interest':interest[tp]}
+    form_tp=int(request.form.get('time_period'))
+    tp=date.today()+relativedelta(months=form_tp)
+    h_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
     session['user']['loans']=h_loan_details
-    add_h_loan(session['user'])
+    add_h_loan(session['user'],tp)
     send_mail_h_loan(session['user'])
     return redirect(url_for('views.ourservices'))
 

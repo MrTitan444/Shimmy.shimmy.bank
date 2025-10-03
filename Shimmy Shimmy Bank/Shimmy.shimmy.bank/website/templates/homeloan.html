@@ -41,34 +41,34 @@
               <li><b>20 years:</b> 24% per annum</li>
             </ul>
               <center><details><summary style="font-family: 'Courier New'"><b>Enter amount and choose time period</b></summary>
-              <form>
+              <form method="post" action="{{ url_for('views.homeloan_btn') }}">
               <fieldset>
                   <center><div class="form-group">
                   <label for="Amount" style="color: #4f5769;"><b>Enter Amount:</b></label>
-                  <input type="text" class="form-control" id="Amount" placeholder="Enter Amount" required>
+                  <input name="loan_amt" type="number" min="0" max="150000000" class="form-control" id="Amount" placeholder="Enter Amount" required>
                   </div></center>
               <ul>
                 <li>
-                  <label for="3months"><font style="font-family: 'Courier New'">3 months</font><input type="radio" id="3months" name="time_period" value="3months" /></label>
+                  <label for="3months"><font style="font-family: 'Courier New'">3 months</font><input type="radio" id="3months" name="time_period" value="3" /></label>
 
                 </li>
                 <li>
-                  <label for="6months"><font style="font-family: 'Courier New'">6 months</font><input type="radio" id="6months" name="time_period" value="6months" /></label>
+                  <label for="6months"><font style="font-family: 'Courier New'">6 months</font><input type="radio" id="6months" name="time_period" value="6" /></label>
                 </li>
                <li>
-                 <label for="1year"><font style="font-family: 'Courier New'">1 year</font><input type="radio" id="1year" name="time_period" value="1year" /></label>
+                 <label for="1year"><font style="font-family: 'Courier New'">1 year</font><input type="radio" id="1year" name="time_period" value="12" /></label>
                 </li>
                 <li>
-                 <label for="2years"><font style="font-family: 'Courier New'">2 years</font><input type="radio" id="2years" name="time_period" value="2years" /></label>
+                 <label for="2years"><font style="font-family: 'Courier New'">2 years</font><input type="radio" id="2years" name="time_period" value="24" /></label>
                 </li>
                 <li>
-                 <label for="5years"><font style="font-family: 'Courier New'">5 years</font><input type="radio" id="5years" name="time_period" value="5years" /></label>
+                 <label for="5years"><font style="font-family: 'Courier New'">5 years</font><input type="radio" id="5years" name="time_period" value="60" /></label>
                 </li>
                 <li>
-                 <label for="10years"><font style="font-family: 'Courier New'">10 years</font><input type="radio" id="10years" name="time_period" value="10years" /></label>
+                 <label for="10years"><font style="font-family: 'Courier New'">10 years</font><input type="radio" id="10years" name="time_period" value="120" /></label>
                 </li>
                 <li>
-                 <label for="20years"><font style="font-family: 'Courier New'">20 years</font><input type="radio" id="20years" name="time_period" value="20years" /></label>
+                 <label for="20years"><font style="font-family: 'Courier New'">20 years</font><input type="radio" id="20years" name="time_period" value="240" /></label>
                 </li>
                 <br><center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Home loan application</a></b></button></center>
              </ul>
