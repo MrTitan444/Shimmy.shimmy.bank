@@ -104,4 +104,12 @@ def deposit_btn():
 def hl_t_btn():
     h_loan_transfer(session['user'])
     session['h_loan_transfer']=True
+    send_mail_d(session['user'],session['user']['h_loans']['amt'])
     return render_template('homeloan.html')
+
+@views.route('cl_t_btn',methods=['POST'])
+def cl_t_btn():
+    c_loan_transfer(session['user'])
+    session['c_loan_transfer']=True
+    send_mail_d(session['user'],session['user']['h_loans']['amt'])
+    return render_template('carloan.html')
