@@ -84,7 +84,7 @@ def add_h_loan(user,tp):
     global mycon,cursor   
     #cid, hl, h_amt, h_tp, interest, start date, close date                                                                                                
     r=(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],tp)
-    q='insert into h_loans values("%s","yes",%s,%s,%s,curdate(),%s)'
+    q='insert into h_loans values("%s",%s,%s,%s,curdate(),%s)'
     cursor.execute(q,r)      
     session['h_loan']=True
     return user 
