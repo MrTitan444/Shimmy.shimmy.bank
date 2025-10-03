@@ -82,8 +82,9 @@ def add_c_loan(user,tp):
     
 def add_h_loan(user,tp): 
     global mycon,cursor   
-    #cid, hl, h_amt, h_tp, interest, start date, close date                                                                                                
-    r=(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],tp)
+    #cid, hl, h_amt, h_tp, interest, start date, close date     
+    print(user)
+    r=(user['cid'],user['h_loan']['amt'],user['h_loan']['tp'],user['h_loan']['interest'],tp)
     q='insert into h_loans values("%s",%s,%s,%s,curdate(),%s)'
     cursor.execute(q,r)      
     session['h_loan']=True
@@ -329,7 +330,7 @@ def send_mail_h_loan(user):
     cid=user['cid']
     subject='Confirmation of home loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Home loan under the customer id : {user['cid']}
-The amount is : {user['loans']['amt']}
+The amount is : {user['h_loan']['amt']}
 Regards,
 Shimmy Shimmy Bank Team
 This is a system generated email please do not reply'''
