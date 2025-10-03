@@ -104,6 +104,7 @@ def deposit_btn():
 def hl_t_btn():
     h_loan_transfer(session['user'])
     session['h_loan_transfer']=True
+    print(session['user']['h_loan']['amt'])
     send_mail_d(session['user'],session['user']['h_loan']['amt'])
     return render_template('homeloan.html')
 
