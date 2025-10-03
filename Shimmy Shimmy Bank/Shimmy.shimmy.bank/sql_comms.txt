@@ -5,7 +5,6 @@ create database shimmy_shimmy_bank;
 use shimmy_shimmy_bank;
 create table cc(cid char(6) primary key, ccno char(19),cvv char(3), valid_through date);
 create table users(cid char(6) primary key, name varchar(25), aadhar char(16), email varchar(35), age int, password varchar(20),sb char(5) default '-1');
-create table h_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date);
-create table c_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date);
+create table h_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date date);
+create table c_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date date);
 insert into users values('0','shimmy',0,'shimmy_shimmy_bank@gmail.com',0,'shimmy',-1);
-
