@@ -39,6 +39,12 @@
               <li><b>120 months (10 years):</b> 20% per annum</li>
               <li><b>240 months (20 years):</b> 24% per annum</li>
             </ul>
+      {% if session.user['sb']!=-1 %}
+       <form method="post" action="{{ url_for('views.cl_t_btn') }}">
+          <br><center><button type="submit" style="background-color: #4c98af; height: 100%; width: 100%; cursor: pointer; color: white"><b>Transfer loan amount to savings bank account</b></button></center>
+       </form>
+     {% endif %}
+     <br>
               <center><details><summary style="font-family: 'Courier New'"><b>Enter amount and choose time period</b></summary>
               <form method="post" action="{{ url_for('views.carloan_btn') }}">
               <fieldset>
@@ -69,21 +75,19 @@
                 <li>
                  <label for="20years"><font style="font-family: 'Courier New'">20 years</font><input type="radio" id="20years" name="time_period" value="20years" /></label>
                 </li>
-                <br><center><button type="submit" class="btn btn-info" @click="submitForm"><b><a href="{{ url_for('views.carloan_btn') }}" style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center>
+                <br><center><button type="submit" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Car loan application</a></b></button></center>
              </ul>
             </fieldset>
-            
          </form>
-         {% if session.get('c_loan')==True %}
-            <dialog open style="width: 95%; height: 90px; top: 343px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-              <form method="dialog" open>
-                <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
-                <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Car loan successful</b></p></center>
-            </dialog>
-            {% set dummy=session.pop('c_loan') %}
-          {% endif %}
         </details></center><br><br>
-          </div>
+        {% if session.get('c_loan')==True %}
+          <dialog open style="width: 95%; height: 90px; top: 610px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <form method="dialog" open>
+              <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+              <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px; padding-left: 20px;"><b>Car loan application successful</b></p></center>
+          </dialog>
+          {% set dummy=session.pop('c_loan') %}
+        {% endif %}
           </div>
         </div>
       </div>
