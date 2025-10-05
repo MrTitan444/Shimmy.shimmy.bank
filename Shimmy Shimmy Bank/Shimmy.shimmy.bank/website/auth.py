@@ -83,5 +83,5 @@ def logout():
     return redirect(url_for('views.home'))   
 
 @auth.route('/update')
-def update_profile():
+def update():
     return render_template('update.html')
