@@ -110,6 +110,14 @@ def get_t_sb(user):
     ##except:
        ## return []
 
+def get_sb_b(user):
+    cursor.execute(f'select balance from t_sb_{session["user"]["cid"]} where date=(select max(date) from t_sb_{session["user"]["cid"]})')
+    a=cursor.fetchall()
+    if a:
+        a=a[0][0]
+    else:
+        a=0
+    return a
     
 def check_sb(user):
     global mycon,cursor
