@@ -253,10 +253,10 @@ def send_mail_ver(s_email):
     a='ofbi nazq fwmd ujmr'
     subject='Verification code for account creation at shimmy shimmy bank'
     message=f'''Hello {s_email}!!
- We have recieved a request to create an account at Shimmy Shimmy bank.
- Here is the verification code: {otp}
- Regards,
- Shimmy Shimmy Bank.'''
+We have recieved a request to create an account at Shimmy Shimmy bank.
+Here is the verification code: {otp}
+Regards,
+Shimmy Shimmy Bank.'''
     text=f'''Subject: {subject}
 
  {message}

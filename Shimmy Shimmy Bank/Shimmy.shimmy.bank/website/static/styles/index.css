@@ -60,6 +60,7 @@
 /* Footer */
 .jumbotron {
     position: absolute; 
+    justify-content: left;
     background-color: #353b48;
     color: #dcdde1;
     display: flex;
@@ -70,6 +71,7 @@
     border-radius: 0%;
 }
 .jumbotron.footer {
+    position: absolute;
     background-color: #353b48;
     color: #dcdde1;
     right:0px;
