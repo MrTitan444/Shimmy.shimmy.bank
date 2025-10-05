@@ -146,13 +146,9 @@ def sb_t(reciever,amt,user):
         print('not found')
         session['t_user_not_found']=True
         return False
-    cursor.execute(f'select balance from t_sb_{user["cid"]}')
+    cursor.execute(f'select balance from t_sb_{user["cid"]} where date=(select max(date) from t_sb_{user["cid"]})')
     a=cursor.fetchall()
-    if not a:
-        a=0
-    else:
-        a=a[-1]
-        a=a[0]
+    a=a[-1][0]
     if amt>a:
         session['insufficient_funds']=True
         return False
