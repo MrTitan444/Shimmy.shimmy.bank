@@ -26,29 +26,25 @@
             </div>
             <div class="form-group">
               <label style="color: #4f5769;"><b>Aadhaar :</b></label>
-              <input name='l_aadhaar' class = "form-input" v-model="aadhaar" placeholder="Enter Aadhaar" type="text">
-            </div>
-            <div class="form-group">
-              <label style="color: #4f5769;"><b>Password :</b></label>
-              <input class = "form-input" v-model="password" placeholder="Enter password" type="password">
+              <input name='l_aadhaar' minlength="12" maxlength="12" class = "form-input" v-model="aadhaar" placeholder="Enter Aadhaar" type="text">
             </div>
              <div class="form-group">
               <label style="color: #4f5769;"><b>New Password :</b></label>
               <input name='l_password' class = "form-input" v-model="password" placeholder="Enter new password" type="password">
             </div>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                {% for i in messages %} 
-                  <p> {{i}} </p>
-                {% endfor %}
-              {% endif %}
-            {% endwith %} 
               <div>
             <center><button value="submitForm" type="submit"  class="btn btn-info" @click="submitForm"><b><a style="color: #ffffff; text-decoration: none;">Submit</a></b></center>
             <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/" style="color: #ffffff; text-decoration: none;">Home</a></b></button></center>
-            </div>
-               
+            </div>  
           </form>
+          {% if session.get('update')==True %}
+            <dialog open style="width: 95%; height: 90px; top: 343px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+              <form method="dialog" open>
+                <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+                <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;"><b>Details updated</b></p></center>
+            </dialog>
+            {% set dummy=session.pop('update') %}
+          {% endif %}
         </div>
       </div>
     </div>

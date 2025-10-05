@@ -27,10 +27,15 @@ def login_btn():
 def update_btn():
     l_user['aadhaar'],l_user['password'],l_user['name']=request.form['l_aadhaar'],request.form['l_password'],request.form['name']
     print(session['user']['cid'])
-    cursor.execute("update users set name=%s, aadhar=%s, password=%s where cid=%s",(l_user['name'], l_user['aadhaar'], l_user['password'], session['user']['cid']))
-    mycon.commit()
     print(l_user)
-    return redirect(url_for('views.home'))
+    if l_user['aadhaar']:
+        cursor.execute('update users set aadhar="%s" where cid="%s"'%(l_user['aadhaar'],session['user']['cid']))
+    if l_user['password']:
+        cursor.execute('update users set password="%s" where cid="%s"'%(l_user['password'],session['user']['cid']))
+    if l_user['name']:
+        cursor.execute('update users set name="%s" where cid="%s"'%(l_user['name'],session['user']['cid']))
+    session['update']=True
+    return redirect(url_for('auth.update'))
 
 @auth.route('/signup', methods=['GET'])
 def signup():

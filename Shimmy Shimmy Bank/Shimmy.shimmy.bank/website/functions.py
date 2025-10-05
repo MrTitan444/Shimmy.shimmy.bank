@@ -176,7 +176,7 @@ def withdraw_(user,amt):
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
     a=cursor.fetchall()
     if a:
-        a=int(a[0])
+        a=int(a[-1][0])
     else:
         a=0
     if amt>a:
