@@ -26,6 +26,13 @@ def confirm_acc():
 
 @views.route('/profile')
 def profile():
+    cursor.execute(f'select balance from t_sb_{session["user"]["cid"]} where date=(select max(date) from t_sb_{session["user"]["cid"]})')
+    a=cursor.fetchall()
+    if a:
+        a=a[0][0]
+    else:
+        a=0
+    session["user"]["sb_b"]=a
     return render_template('profile.html',user=session['user'])
 
 
