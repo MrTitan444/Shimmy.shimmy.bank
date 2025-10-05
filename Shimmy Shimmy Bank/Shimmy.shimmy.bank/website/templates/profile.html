@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block scripts %}<link rel="stylesheet" type="text/css" href="../static/styles/transfer.css">{{ super() }}
+  <title>View Profile Details</title>
+</head>
+<body style="background-color: #a0d5df;">
+  {% endblock %}
+  <!-- Navbar -->
+{% block navbar %}
+{{ super() }}
+  <!-- Content -->
+  <div class="card">
+    <div class="card-body">
+            <div>
+                <h1 style="font-family: 'Courier New'"><center><b>PROFILE DETAILS</b></center></h1>
+                <br>
+                <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Name : </b>{{ user.name }}</p>
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Email : </b>{{ user.email }}</p>
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Aadhaar : </b>{{ user.aadhaar }}</p>
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Age : </b>{{ user.age }}</p>
+                    </div>
+                    <div class="col-sm-6">
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Customer Number : </b>{{ user.cid }}</p>
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Savings Account Number : </b>{{ user.sb }}</p>
+                    <p style="font-family: 'Courier New'; font-size: 20px;"><b>Savings Balance : </b>{{ user.sb_b if user.sb != -1 else "No Savings Account" }}</p>
+                    </div>
+                </div>
+                </div>
+                <br><br>
+                <center><button type="button" class="btn btn-info" @click="submitForm"><b><a href="/" style="text-decoration: none;color: white;">Home</a></b></button></center>
+            </div>
+            </div>
+    </div>
+  </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}{{ super() }}{% endblock %}
+</body>
+</html>
