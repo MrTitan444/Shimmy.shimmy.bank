@@ -5,6 +5,8 @@ import time
 c=r=0
 l_user={};user={}
 auth=Blueprint('auth', __name__)
+mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
+cursor=mycon.cursor()
 
 @auth.route('/login',methods=['GET'])
 def login():
