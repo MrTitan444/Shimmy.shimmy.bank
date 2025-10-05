@@ -97,13 +97,15 @@ def get_info_login(user):
     
 def get_t_sb(user):
     global mycon,cursor
-    ##try:
-    mycon=sqltor.connect(host='localhost',user='root1',password='12345',database='shimmy_shimmy_bank',autocommit=True)
-    cursor=mycon.cursor()
-    print("enter")
-    print(user['cid'])
     cursor.execute('select * from t_sb_{}'.format(user['cid']))
     data=cursor.fetchall()[::-1]
+    cursor.execute(f'select balance from t_sb_{user["cid"]} where date=(select max(date) from t_sb_{user["cid"]})')
+    a=cursor.fetchall()
+    if a:
+        a=a[0][0]
+    else:
+        a=0
+    session['user']['sb_b']=a
     return data
     ##except:
        ## return []
