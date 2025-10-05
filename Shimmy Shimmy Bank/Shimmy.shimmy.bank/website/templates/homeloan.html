@@ -40,12 +40,6 @@
               <li><b>10 years:</b> 20% per annum</li>
               <li><b>20 years:</b> 24% per annum</li>
             </ul>
-     {% if session.user['sb']!=-1 %}
-       <form method="post" action="{{ url_for('views.hl_t_btn') }}">
-          <br><center><button type="submit" style="background-color: #4c98af; height: 100%; width: 100%; cursor: pointer; color: white"><b>Transfer loan amount to savings bank account</b></button></center>
-       </form>
-     {% endif %}
-     <br>
           <center><details><summary style="font-family: 'Courier New'"><b>Enter amount and choose time period</b></summary>
               <form method="post" action="{{ url_for('views.homeloan_btn') }}">
               <fieldset>
@@ -82,11 +76,17 @@
          </form>
         </details></center><br><br>
     {% if session.get('h_loan')==True %}
-      <dialog open style="width: 95%; height: 100px; top: 575px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+      <dialog open style="width: 95%; height: 110px; top: 520px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
         <form method="dialog" open>
           <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
           <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px; padding-left: 20px;"><b>Home loan application successful</b></p></center>
         </form>
+        {% if session.user['sb']!=-1 %}
+          <form method="post" action="{{ url_for('views.hl_t_btn') }}">
+             <br><center><button type="submit" style="background-color: #4c98af; height: 100%; width: 100%; cursor: pointer; color: white"><b>Transfer loan amount to savings bank account</b></button></center>
+          </form>
+        {% endif %}
+        <br>
       </dialog>
       {% set dummy=session.pop('h_loan') %}
     {% endif %}

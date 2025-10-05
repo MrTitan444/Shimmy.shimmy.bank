@@ -43,6 +43,7 @@ def carloan_btn():
     session['user']['c_loan']=c_loan_details
     add_c_loan(session['user'],tp)
     send_mail_c_loan(session['user'])
+    return render_template('carloan.html')
 
 
 @views.route('/homeloan',methods=['GET'])
@@ -113,4 +114,4 @@ def cl_t_btn():
     c_loan_transfer(session['user'])
     session['c_loan_transfer']=True
     send_mail_d(session['user'],session['user']['c_loan']['amt'])
-    return render_template('carloan.html')
+    return redirect(url_for('views.carloan'))

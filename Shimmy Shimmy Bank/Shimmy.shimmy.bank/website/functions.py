@@ -74,8 +74,8 @@ def add_sb(user):
 
 def add_c_loan(user,tp):  
     global mycon,cursor
-    r=(user['cid'],user['loans']['amt'],user['loans']['tp'],user['loans']['interest'],tp)
-    q='insert into c_loans values("%s","yes",%s,%s,%s,curdate(),%s)'
+    r=(user['cid'],user['c_loan']['amt'],user['c_loan']['tp'],user['c_loan']['interest'],tp)
+    q='insert into c_loans values("%s",%s,%s,%s,curdate(),%s)'
     cursor.execute(q,r)      
     session['c_loan']=True
     return user 
@@ -309,7 +309,7 @@ def send_mail_c_loan(user):
     cid=user['cid']
     subject='Confirmation of car loan'
     message=f'''Hello {user['email']}\nWe are happy to confirm your Car loan under the customer id : {user['cid']}
-The amount is : {user['loans']['amt']}
+The amount is : {user['c_loan']['amt']}
 Regards,
 Shimmy Shimmy Bank Team
 This is a system generated email. Please do not reply.'''
