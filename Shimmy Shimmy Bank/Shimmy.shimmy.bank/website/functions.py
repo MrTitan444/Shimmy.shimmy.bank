@@ -45,13 +45,9 @@ def c_sql():
 
 def add_user_sql(user):
     global mycon,cursor
-    try:
-        cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,'-1')", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
-        
-        return user
-    except:
-        return False
-
+    cursor.execute("insert into users values(%s, %s, %s, %s, %s, %s,'-1')", (user['cid'], user['name'], user['aadhaar'], user['email'], user['age'], user['password']))
+    return user
+    
 def check_login(user):
     global mycon,cursor
     try:
@@ -75,18 +71,16 @@ def add_sb(user):
 def add_c_loan(user,tp):  
     global mycon,cursor
     r=(user['cid'],user['c_loan']['amt'],user['c_loan']['tp'],user['c_loan']['interest'],tp)
-    q='insert into c_loans values("%s",%s,%s,%s,curdate(),%s)'
+    q='insert into c_loans values("%s",%s,%s,%s,curdate(),"%s")'
     cursor.execute(q,r)      
     session['c_loan']=True
     return user 
     
-def add_h_loan(user,tp): 
+def add_h_loan(user): 
     global mycon,cursor   
-    #cid, hl, h_amt, h_tp, interest, start date, close date     
-    print(user)
-    r=(user['cid'],user['h_loan']['amt'],user['h_loan']['tp'],user['h_loan']['interest'],tp)
-    q='insert into h_loans values("%s",%s,%s,%s,curdate(),%s)'
-    cursor.execute(q,r)      
+    #cid, hl, h_amt, h_tp, interest, start date, close date   
+    q='insert into h_loans values("%s",%s,%s,%s,curdate(),"%s")'%(user['cid'],user['h_loan']['amt'],user['h_loan']['tp'],user['h_loan']['interest'],date.today()+relativedelta(months=user['h_loan']['tp']))  
+    cursor.execute(q)
     session['h_loan']=True
     return user 
 
@@ -217,7 +211,10 @@ def h_loan_transfer(user):
     tid=randint(1000,9999)
     cursor.execute(f'select balance from t_sb_{user['cid']} where date=(select max(date) from t_sb_{user['cid']})')
     d=cursor.fetchall()
-    amt=d[0][0]
+    if not d:
+        amt=0
+    else:
+        amt=d[0][0]
     print('balance:',amt,'loanamt:',user['h_loan']['amt'])                     #date, amt, particular,balance, tid, to/from
     q=f'insert into t_sb_{user["cid"]} values(sysdate(),%s,1,%s,%s,"Loan")'
     r=(user['h_loan']['amt'],user['h_loan']['amt']+amt,tid)

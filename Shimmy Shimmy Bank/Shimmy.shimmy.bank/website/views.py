@@ -4,11 +4,11 @@ from random import randint
 from datetime import date
 views = Blueprint('views', __name__)
 
-@views.route('/')
+@views.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
-@views.route('/ourservices')
+@views.route('/ourservices', methods=['GET'])
 def ourservices():
     return render_template('ourservices.html') 
 
@@ -18,12 +18,14 @@ def confirm_acc():
     print(acc)
     if "savings" in acc:
         session['user']['sb']=randint(10000,99999)
+        session.modified=True
+        print(session)
         add_sb(session['user'])
         send_mail_sb(session['user'])
-    return redirect(url_for('views.ourservices'))
+        return redirect(url_for('views.ourservices'))
 
 
-@views.route('/transhistsav')
+@views.route('/transhistsav',methods=['GET'])
 def transhistsav():
     l=get_t_sb(session['user'])
     #date amount particular balance tid
@@ -43,7 +45,7 @@ def carloan_btn():
     session['user']['c_loan']=c_loan_details
     add_c_loan(session['user'],tp)
     send_mail_c_loan(session['user'])
-    return render_template('carloan.html')
+    return redirect(url_for('views.carloan'))
 
 
 @views.route('/homeloan',methods=['GET'])
@@ -55,10 +57,11 @@ def homeloan_btn():
     interest={3:5,6:5.5,12:12,24:14,60:17,120:20,240:24}
     amt=int(request.form['loan_amt'])
     form_tp=int(request.form.get('time_period'))
+    print(form_tp, type(form_tp))
     tp=date.today()+relativedelta(months=form_tp)
     h_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
     session['user']['h_loan']=h_loan_details
-    add_h_loan(session['user'],tp)
+    add_h_loan(session['user'])
     send_mail_h_loan(session['user'])
     return redirect(url_for('views.homeloan'))
 
@@ -76,7 +79,7 @@ def s_transfer_btn():
     if t:
         send_mail_d(get_reciever_id(s_no),s_amt)
         send_mail_w(session['user'],s_amt)
-    return render_template('transfer.html')
+    return redirect(url_for('views.transfer'))
 
 
 @views.route('/withdraw',methods=['GET'])
@@ -88,7 +91,7 @@ def withdraw_btn():
     amt=int(request.form['amt'])
     if withdraw_(session['user'],amt):
         send_mail_w(session['user'],amt)
-    return render_template('withdraw.html')
+    return redirect(url_for('views.withdraw'))
 
 @views.route('/deposit',methods=['GET'])
 def deposit():
@@ -99,7 +102,7 @@ def deposit_btn():
     amt=request.form['amt']
     deposit_(session['user'],amt)
     send_mail_d(session['user'],amt)
-    return render_template('deposit.html')
+    return redirect(url_for('views.deposit'))
 
 @views.route('hl_t_btn',methods=['POST'])
 def hl_t_btn():
@@ -107,7 +110,7 @@ def hl_t_btn():
     session['h_loan_transfer']=True
     print(session['user']['h_loan']['amt'])
     send_mail_d(session['user'],session['user']['h_loan']['amt'])
-    return render_template('homeloan.html')
+    return redirect(url_for('views.homeloan'))
 
 @views.route('cl_t_btn',methods=['POST'])
 def cl_t_btn():
