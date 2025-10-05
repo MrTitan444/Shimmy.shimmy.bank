@@ -88,7 +88,7 @@ def get_info_login(user):
     try:
         cursor.execute('select * from users where cid ={}'.format(user['cid']))
         data=list(cursor.fetchone())
-        a=['cid','name','aadhar','email','age','password','sb']
+        a=['cid','name','aadhaar','email','age','password','sb']
         user=dict(zip(a,data))
         return user 
     except:
