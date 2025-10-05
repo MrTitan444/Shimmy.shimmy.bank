@@ -43,7 +43,7 @@ def carloan_btn():
     tp=date.today()+relativedelta(months=form_tp)
     c_loan_details={'amt':amt,'tp':form_tp,'interest':interest[form_tp]}
     session['user']['c_loan']=c_loan_details
-    add_c_loan(session['user'],tp)
+    add_c_loan(session['user'])
     send_mail_c_loan(session['user'])
     return redirect(url_for('views.carloan'))
 

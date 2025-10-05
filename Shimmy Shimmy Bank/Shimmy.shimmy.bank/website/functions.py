@@ -68,11 +68,10 @@ def add_sb(user):
     
 
 
-def add_c_loan(user,tp):  
+def add_c_loan(user):  
     global mycon,cursor
-    r=(user['cid'],user['c_loan']['amt'],user['c_loan']['tp'],user['c_loan']['interest'],tp)
-    q='insert into c_loans values("%s",%s,%s,%s,curdate(),"%s")'
-    cursor.execute(q,r)      
+    q='insert into h_loans values("%s",%s,%s,%s,curdate(),"%s")'%(user['cid'],user['h_loan']['amt'],user['h_loan']['tp'],user['h_loan']['interest'],date.today()+relativedelta(months=user['h_loan']['tp']))  
+    cursor.execute(q)      
     session['c_loan']=True
     return user 
     
