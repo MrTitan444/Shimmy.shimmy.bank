@@ -24,6 +24,10 @@ def confirm_acc():
         send_mail_sb(session['user'])
         return redirect(url_for('views.ourservices'))
 
+@views.route('/profile')
+def profile():
+    return render_template('profile.html',user=session['user'])
+
 
 @views.route('/transhistsav',methods=['GET'])
 def transhistsav():
