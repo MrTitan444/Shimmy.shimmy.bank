@@ -142,7 +142,10 @@ def sb_t(reciever,amt,user):
         return False
     cursor.execute(f'select balance from t_sb_{user["cid"]} where date=(select max(date) from t_sb_{user["cid"]})')
     a=cursor.fetchall()
-    a=a[-1][0]
+    if a:
+        a=a[-1][0]
+    else:
+        a=0
     if amt>a:
         session['insufficient_funds']=True
         return False
@@ -172,8 +175,11 @@ def sb_t(reciever,amt,user):
 def withdraw_(user,amt):
     global mycon,cursor
     cursor.execute(f'select balance from t_sb_{user["cid"]}')
-    a=cursor.fetchall()[-1]
-    a=int(a[0])
+    a=cursor.fetchall()
+    if a:
+        a=int(a[0])
+    else:
+        a=0
     if amt>a:
         session['s_withdraw']=False
         return False

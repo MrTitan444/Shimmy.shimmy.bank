@@ -20,7 +20,7 @@
             <form method="post" action="{{ url_for('views.withdraw_btn') }}">
                 <center><div class="form-group">
                   <label for="amount" style="color: #4f5769;"><b>Enter amount:</b></label>
-                  <input type="number" min="0" max="150000000" class="form-control" id="amount" placeholder="Enter amount" name="amt" required>
+                  <input type="number" min="1" max="150000000" class="form-control" id="amount" placeholder="Enter amount" name="amt" required>
                 </div></center>
                 <center><button type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;">Confirm Transfer</a></b></button></center>
                 <center><button type="submit" class="btn btn-info" @click="submitForm"><b><a href="{{ url_for('views.ourservices') }}" style="text-decoration: none;color: white;">Go back to services</a></b></button></center>
