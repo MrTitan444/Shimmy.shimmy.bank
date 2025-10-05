@@ -86,9 +86,9 @@ def add_h_loan(user):
 def get_info_login(user):
     global mycon,cursor
     try:
-        cursor.execute('select cid, email, sb from users where cid ={}'.format(user['cid']))
+        cursor.execute('select * from users where cid ={}'.format(user['cid']))
         data=list(cursor.fetchone())
-        a=['cid','email','sb']
+        a=['cid','name','aadhar','email','age','password','sb']
         user=dict(zip(a,data))
         return user 
     except:
