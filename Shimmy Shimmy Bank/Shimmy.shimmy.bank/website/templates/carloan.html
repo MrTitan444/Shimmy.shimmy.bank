@@ -75,7 +75,7 @@
          </form>
         </details></center><br><br>
         {% if session.get('c_loan')==True %}
-          <dialog open style="width: 95%; height: 110px; top: 560px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+          <dialog open style="width: 95%; height: 110px; top: 555px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
             <form method="dialog" open>
               <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
               <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px; padding-left: 20px;"><b>Car loan application successful</b></p></center>
@@ -87,6 +87,14 @@
             {% endif %}
           </dialog>
           {% set dummy=session.pop('c_loan') %}
+        {% endif %}
+        {% if session.get('c_loan_transfer')==True %}
+          <dialog open style="width: 95%; height: 110px; top: 555px; left: 0; border: 2px solid rgb(0, 0, 0); border-radius: 12px;; background-color: rgb(148, 201, 146); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+            <form method="dialog" open>
+              <center> <button class="Close-button" aria-label="Close" style="background-color: rgb(157, 194, 141); border-radius: 12px; color: rgb(255, 255, 255); cursor: pointer;"><b>Close</b></button></center>
+              <center><p style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(0, 0, 0);font-size: 20px;padding-left: 10px;"><b>Loan amount transferred to savings bank account successfully</b></p></center>
+            </form>
+          {% set dummy=session.pop('c_loan_transfer') %}
         {% endif %}
           </div>
         </div>
