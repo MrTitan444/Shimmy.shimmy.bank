@@ -51,7 +51,13 @@
   {% if lasvegas==[] %}
       <br><br><br><br><br><br><br><br><br>
   {% endif %}
-  <br><br><br><br>  <br><br><br><br>  <br><br><br><br>
+  {% if lasvegas|length == 1 %}
+      <br><br><br><br><br>
+  {% endif %}
+  {% if lasvegas|length == 2 %}
+      <br><br>
+  {% endif %}
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   {% endblock %}
 <!-- Footer -->
 {% block footer %}{{ super() }}{% endblock %}

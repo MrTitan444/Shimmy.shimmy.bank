@@ -7,3 +7,15 @@ create table users(cid char(6) primary key, name varchar(25), aadhar char(16), e
 create table h_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date date);
 create table c_loans(cid char(6) references user(cid),amt int default 0,tp int,interest int, s_date date, c_date date);
 insert into users values('0','shimmy',0,'shimmy.shimmy.bank@gmail.com',0,'shimmy',0);
+insert into users values('1','user1',123412341234,'user1@gmail.com',18,'user1',11111);
+insert into users values('2','user2',647563826473,'user2@gmail.com',19,'user2',22222);
+insert into users values('3','user3',936573756473,'user3@gmail.com',23,'user3',33333);
+insert into users values('4','user4',563846583745,'user4@gmail.com',31,'user4',44444);
+insert into users values('5','user5',957236283464,'user5@gmail.com',43,'user5',55555);
+insert into users values('6','user6',432143214321,'user6@gmail.com',22,'user6',66666);
+create table t_sb_1 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
+create table t_sb_2 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
+create table t_sb_3 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
+create table t_sb_4 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
+create table t_sb_5 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
+create table t_sb_6 (date datetime ,amount int, particular enum("Deposit","Withdrawal"), balance int default 0, tid int, To_From char(6) default "Self");
