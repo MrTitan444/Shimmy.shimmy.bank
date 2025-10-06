@@ -67,7 +67,6 @@ def transfer():
 def s_transfer_btn():
     s_amt=int(request.form['s_transfer_amt'])
     s_no=request.form['s_no']
-    print(s_no)
     # reciever amt user
     t=sb_t(s_no,s_amt,session['user'])
     if t:
