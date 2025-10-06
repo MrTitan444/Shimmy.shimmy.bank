@@ -169,10 +169,11 @@ def sb_t(reciever,amt,user):
         cursor.execute(q)
         cursor.execute(f'select balance from t_sb_{x}')
         z=cursor.fetchall()
-        if not z:
+        if z:
+            z=z[-1]
+            z=int(z[0])
+        else:
             z=0
-        z=z[-1]
-        z=int(z[0])
         cursor.execute('select sb from users where cid="%s"'%(user['cid']))
         e=cursor.fetchall()[-1][0]
         q=f'insert into t_sb_{x}'
