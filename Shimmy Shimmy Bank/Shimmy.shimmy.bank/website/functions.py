@@ -161,7 +161,7 @@ def sb_t(reciever,amt,user):
     else:
         #table - date, amt, particular, balance,cid
         tid=randint(1000,9999)
-        cursor.execute('select cid from users where sb=%s'%(reciever))
+        cursor.execute('select cid from users where sb="%s"'%(reciever))
         x=cursor.fetchone() # reciver cid
         x=''.join(x)
         q=f'insert into t_sb_{user['cid']}'
@@ -177,7 +177,7 @@ def sb_t(reciever,amt,user):
         cursor.execute('select sb from users where cid="%s"'%(user['cid']))
         e=cursor.fetchall()[-1][0]
         q=f'insert into t_sb_{x}'
-        q+=' values(sysdate(),%s,1,%s,%s,%s)'%(amt,amt+z,tid,e)
+        q+=' values(sysdate(),%s,1,%s,%s,"%s")'%(amt,amt+z,tid,e)
         cursor.execute(q)
         session['s_transfer']=True
         return True
