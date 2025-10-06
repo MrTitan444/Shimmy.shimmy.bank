@@ -71,6 +71,10 @@ def verify_btn():
         user['sb']=-1
         session['user']=user
         session['login']=True
+        session['user']['sb']=randint(10000,99999)
+        session.modified=True
+        add_sb(session['user'])
+        send_mail_sb(session['user'])
         return redirect(url_for('views.home'))
     else:
         session['v_fail']=True

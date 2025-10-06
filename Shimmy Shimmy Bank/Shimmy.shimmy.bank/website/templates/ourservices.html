@@ -28,24 +28,6 @@
   <div class="card">
     <div class="card-body">
           <div>
-            {% if session.user.sb==-1 %}
-              <h1 style="font-family: 'Courier New'"><center><b>OPEN AN ACCOUNT</b></center></h1>
-              <center><details><summary style="font-family: 'Courier New'"><b>Choose Account Type</b></summary>
-                <form method="POST" action="{{ url_for('views.confirm_acc') }}">
-                    <fieldset>
-                    <ul>
-                        <li>
-                          <label for="savings"><font style="font-family: 'Courier New'">Savings Account</font><input type="checkbox" id="savings" name="account" value="savings" /></label>
-
-                        </li>
-                  </ul>
-                  </fieldset> 
-                  </details></center><br><br>
-                  <center><button  type="submit" value="submitForm" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;"> Confirm Accounts</a></b></button></center><br><br>
-                </form>
-            {% endif %}
-          </div>
-          <div>
             <h1 style="font-family: 'Courier New'"><center><b>LOANS</b></center></h1>
             <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/homeloan"> Home Loan </a></b></button></center>
             <center><button type="button" class="btn btn-info" @click="submitForm"><b><a style="text-decoration: none;color: white;" href="/carloan">Car Loan</a></b></button></center><br><br>

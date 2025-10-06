@@ -12,17 +12,6 @@ def home():
 def ourservices():
     return render_template('ourservices.html') 
 
-@views.route('/confirm_acc',methods=['POST'])
-def confirm_acc():
-    acc=request.form.getlist('account')
-    print(acc)
-    if "savings" in acc:
-        session['user']['sb']=randint(10000,99999)
-        session.modified=True
-        print(session)
-        add_sb(session['user'])
-        send_mail_sb(session['user'])
-        return redirect(url_for('views.ourservices'))
 
 @views.route('/profile')
 def profile():
